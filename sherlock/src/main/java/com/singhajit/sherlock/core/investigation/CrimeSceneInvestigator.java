@@ -1,12 +1,22 @@
-package com.singhajit.sherlock.core;
+package com.singhajit.sherlock.core.investigation;
+
+import com.singhajit.sherlock.crashes.model.Crime;
 
 import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 
-public class StackTraceBuilder {
+public class CrimeSceneInvestigator {
 
-  public static String buildStackTrace(Thread thread, Throwable throwable) {
+  private final Thread thread;
+  private final Throwable throwable;
+
+  public CrimeSceneInvestigator(Thread thread, Throwable throwable) {
+    this.thread = thread;
+    this.throwable = throwable;
+  }
+
+  public Crime getCrime() {
     StringBuilder builder = new StringBuilder();
 
     builder.append("Time: ");
@@ -25,7 +35,7 @@ public class StackTraceBuilder {
       builder.append(stackTrace(throwable.getCause().getStackTrace()));
     }
 
-    return builder.toString();
+    return new Crime(builder.toString());
   }
 
   private static String stackTrace(StackTraceElement[] stackTrace) {
