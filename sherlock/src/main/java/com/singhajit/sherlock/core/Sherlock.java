@@ -5,7 +5,7 @@ import android.content.Context;
 import com.singhajit.sherlock.core.investigation.CrimeSceneInvestigator;
 import com.singhajit.sherlock.core.realm.SherlockRealm;
 import com.singhajit.sherlock.core.repo.CriminalRecords;
-import com.singhajit.sherlock.crashes.model.Crime;
+import com.singhajit.sherlock.core.investigation.Crime;
 
 public class Sherlock {
   public static void startInvestigation(final Context context) {

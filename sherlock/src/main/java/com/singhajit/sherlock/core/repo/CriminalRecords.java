@@ -1,7 +1,7 @@
 package com.singhajit.sherlock.core.repo;
 
 import com.singhajit.sherlock.core.realm.RealmSequenceGenerator;
-import com.singhajit.sherlock.crashes.model.Crime;
+import com.singhajit.sherlock.core.investigation.Crime;
 
 import java.util.List;
 

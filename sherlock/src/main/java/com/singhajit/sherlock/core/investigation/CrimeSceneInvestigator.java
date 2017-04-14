@@ -1,10 +1,10 @@
 package com.singhajit.sherlock.core.investigation;
 
-import com.singhajit.sherlock.crashes.model.Crime;
-
 import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
+
+import static java.lang.String.format;
 
 public class CrimeSceneInvestigator {
 
@@ -18,6 +18,7 @@ public class CrimeSceneInvestigator {
 
   public Crime investigate() {
     StringBuilder factsBuilder = new StringBuilder();
+    String placeOfCrime = "";
 
     factsBuilder.append("Time: ");
     factsBuilder.append(new Date());
@@ -32,10 +33,13 @@ public class CrimeSceneInvestigator {
     factsBuilder.append("\n");
     factsBuilder.append("Caused By: ");
     if (throwable.getCause() != null) {
-      factsBuilder.append(stackTrace(throwable.getCause().getStackTrace()));
+      StackTraceElement[] stackTrace = throwable.getCause().getStackTrace();
+      StackTraceElement stackTraceElement = stackTrace[0];
+      placeOfCrime = format("%s:%d", stackTraceElement.getClassName(), stackTraceElement.getLineNumber());
+      factsBuilder.append(stackTrace(stackTrace));
     }
 
-    return new Crime(factsBuilder.toString());
+    return new Crime(placeOfCrime, factsBuilder.toString());
   }
 
   private static String stackTrace(StackTraceElement[] stackTrace) {

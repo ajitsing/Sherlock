@@ -26,7 +26,8 @@ public class CrimeSceneInvestigatorTest {
 
     CrimeSceneInvestigator investigator = new CrimeSceneInvestigator(thread, throwable);
 
-    assertThat(investigator.investigate().getFacts(), containsString("Thread: Main Thread\n" +
+    Crime crime = investigator.investigate();
+    assertThat(crime.getFacts(), containsString("Thread: Main Thread\n" +
         "Message: Full Message\n" +
         "at Class1.method1(file1:1)\n" +
         "at Class2.method2(file2:2)\n\n" +
@@ -34,5 +35,6 @@ public class CrimeSceneInvestigatorTest {
         "at Class1.method1(file1:1)\n" +
         "at Class2.method2(file2:2)\n")
     );
+    assertThat(crime.getPlaceOfCrime(), containsString("Class2:2"));
   }
 }

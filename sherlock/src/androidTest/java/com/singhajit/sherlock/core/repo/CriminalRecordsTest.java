@@ -1,7 +1,7 @@
 package com.singhajit.sherlock.core.repo;
 
+import com.singhajit.sherlock.core.investigation.Crime;
 import com.singhajit.sherlock.core.realm.SherlockRealm;
-import com.singhajit.sherlock.crashes.model.Crime;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -34,14 +34,16 @@ public class CriminalRecordsTest {
   public void shouldAddCrimeToCriminalRecords() throws Exception {
     CriminalRecords criminalRecords = new CriminalRecords(realm);
     String crimeDetails = "crime details";
+    String placeOfCrime = "Crime:23";
 
-    int id = criminalRecords.add(new Crime(crimeDetails));
+    int id = criminalRecords.add(new Crime(placeOfCrime, crimeDetails));
 
     assertThat(realm.where(Crime.class).findAll().size(), is(1));
 
     Crime persistedCrime = realm.where(Crime.class).findFirst();
     assertThat(id, is(1));
     assertThat(persistedCrime.getFacts(), is(crimeDetails));
+    assertThat(persistedCrime.getPlaceOfCrime(), is(placeOfCrime));
     assertThat(persistedCrime.getId(), is(1));
     Date date = persistedCrime.getDate();
 
@@ -59,14 +61,16 @@ public class CriminalRecordsTest {
     CriminalRecords criminalRecords = new CriminalRecords(realm);
     String facts1 = "crime1 details";
     String facts2 = "crime2 details";
+    String placeOfCrime = "Class1:1";
 
-    criminalRecords.add(new Crime(facts1));
-    criminalRecords.add(new Crime(facts2));
+    criminalRecords.add(new Crime("ImpactedArea", facts1));
+    criminalRecords.add(new Crime(placeOfCrime, facts2));
 
     List<Crime> crimes = criminalRecords.getAll();
 
     assertThat(crimes.size(), is(2));
     assertThat(crimes.get(0).getFacts(), is(facts2));
+    assertThat(crimes.get(0).getPlaceOfCrime(), is(placeOfCrime));
     assertThat(crimes.get(1).getFacts(), is(facts1));
   }
 }
