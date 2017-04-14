@@ -8,6 +8,7 @@ import org.junit.Test;
 
 import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
 
 import io.realm.Realm;
 
@@ -30,7 +31,7 @@ public class CriminalRecordsTest {
   }
 
   @Test
-  public void shouldPutCrimeInTheRegister() throws Exception {
+  public void shouldAddCrimeToCriminalRecords() throws Exception {
     CriminalRecords criminalRecords = new CriminalRecords(realm);
     String crimeDetails = "crime details";
 
@@ -51,5 +52,21 @@ public class CriminalRecordsTest {
     assertThat(actualDateCalender.get(DATE), is(todayDateCalender.get(DATE)));
     assertThat(actualDateCalender.get(DAY_OF_MONTH), is(todayDateCalender.get(DAY_OF_MONTH)));
     assertThat(actualDateCalender.get(YEAR), is(todayDateCalender.get(YEAR)));
+  }
+
+  @Test
+  public void shouldGetAllCrimesSortedByDate() throws Exception {
+    CriminalRecords criminalRecords = new CriminalRecords(realm);
+    String facts1 = "crime1 details";
+    String facts2 = "crime2 details";
+
+    criminalRecords.add(new Crime(facts1));
+    criminalRecords.add(new Crime(facts2));
+
+    List<Crime> crimes = criminalRecords.getAll();
+
+    assertThat(crimes.size(), is(2));
+    assertThat(crimes.get(0).getFacts(), is(facts2));
+    assertThat(crimes.get(1).getFacts(), is(facts1));
   }
 }

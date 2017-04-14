@@ -3,7 +3,10 @@ package com.singhajit.sherlock.core.repo;
 import com.singhajit.sherlock.core.realm.RealmSequenceGenerator;
 import com.singhajit.sherlock.crashes.model.Crime;
 
+import java.util.List;
+
 import io.realm.Realm;
+import io.realm.Sort;
 
 public class CriminalRecords {
   private final Realm realm;
@@ -19,5 +22,9 @@ public class CriminalRecords {
     realm.copyToRealm(crime);
     realm.commitTransaction();
     return id;
+  }
+
+  public List<Crime> getAll() {
+    return realm.where(Crime.class).findAllSorted("date", Sort.DESCENDING);
   }
 }
