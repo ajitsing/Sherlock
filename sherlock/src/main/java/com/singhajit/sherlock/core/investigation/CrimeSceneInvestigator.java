@@ -16,26 +16,26 @@ public class CrimeSceneInvestigator {
     this.throwable = throwable;
   }
 
-  public Crime getCrime() {
-    StringBuilder builder = new StringBuilder();
+  public Crime investigate() {
+    StringBuilder factsBuilder = new StringBuilder();
 
-    builder.append("Time: ");
-    builder.append(new Date());
-    builder.append("\n");
-    builder.append("Thread: ");
-    builder.append(thread.getName());
-    builder.append("\n");
-    builder.append("Message: ");
-    builder.append(throwable.getLocalizedMessage());
-    builder.append("\n");
-    builder.append(stackTrace(throwable.getStackTrace()));
-    builder.append("\n");
-    builder.append("Caused By: ");
+    factsBuilder.append("Time: ");
+    factsBuilder.append(new Date());
+    factsBuilder.append("\n");
+    factsBuilder.append("Thread: ");
+    factsBuilder.append(thread.getName());
+    factsBuilder.append("\n");
+    factsBuilder.append("Message: ");
+    factsBuilder.append(throwable.getLocalizedMessage());
+    factsBuilder.append("\n");
+    factsBuilder.append(stackTrace(throwable.getStackTrace()));
+    factsBuilder.append("\n");
+    factsBuilder.append("Caused By: ");
     if (throwable.getCause() != null) {
-      builder.append(stackTrace(throwable.getCause().getStackTrace()));
+      factsBuilder.append(stackTrace(throwable.getCause().getStackTrace()));
     }
 
-    return new Crime(builder.toString());
+    return new Crime(factsBuilder.toString());
   }
 
   private static String stackTrace(StackTraceElement[] stackTrace) {

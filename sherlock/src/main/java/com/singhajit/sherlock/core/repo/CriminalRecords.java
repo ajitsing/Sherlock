@@ -5,14 +5,14 @@ import com.singhajit.sherlock.crashes.model.Crime;
 
 import io.realm.Realm;
 
-public class CrimeRegister {
+public class CriminalRecords {
   private final Realm realm;
 
-  public CrimeRegister(Realm realm) {
+  public CriminalRecords(Realm realm) {
     this.realm = realm;
   }
 
-  public int put(Crime crime) {
+  public int add(Crime crime) {
     int id = RealmSequenceGenerator.generate(realm, crime.getType());
     crime.setId(id);
     realm.beginTransaction();

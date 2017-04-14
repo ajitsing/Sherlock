@@ -8,13 +8,13 @@ import io.realm.annotations.PrimaryKey;
 public class Crime extends RealmObject {
   @PrimaryKey
   private int id;
-  private String stackTrace;
+  private String facts;
   private Date date;
 
   public Crime() { }
 
-  public Crime(String stackTrace) {
-    this.stackTrace = stackTrace;
+  public Crime(String facts) {
+    this.facts = facts;
     this.date = new Date();
   }
 
@@ -26,8 +26,8 @@ public class Crime extends RealmObject {
     return Crime.class;
   }
 
-  public String getDetails() {
-    return stackTrace;
+  public String getFacts() {
+    return facts;
   }
 
   public int getId() {

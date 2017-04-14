@@ -1,7 +1,5 @@
 package com.singhajit.sherlock.core.investigation;
 
-import com.singhajit.sherlock.core.investigation.CrimeSceneInvestigator;
-
 import org.junit.Test;
 
 import static org.hamcrest.CoreMatchers.containsString;
@@ -28,7 +26,7 @@ public class CrimeSceneInvestigatorTest {
 
     CrimeSceneInvestigator investigator = new CrimeSceneInvestigator(thread, throwable);
 
-    assertThat(investigator.getCrime().getDetails(), containsString("Thread: Main Thread\n" +
+    assertThat(investigator.investigate().getFacts(), containsString("Thread: Main Thread\n" +
         "Message: Full Message\n" +
         "at Class1.method1(file1:1)\n" +
         "at Class2.method2(file2:2)\n\n" +

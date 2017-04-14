@@ -1,7 +1,6 @@
 package com.singhajit.sherlock.core.repo;
 
 import com.singhajit.sherlock.core.realm.SherlockRealm;
-import com.singhajit.sherlock.core.repo.CrimeRegister;
 import com.singhajit.sherlock.crashes.model.Crime;
 
 import org.junit.Before;
@@ -19,7 +18,7 @@ import static java.util.Calendar.YEAR;
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
 
-public class CrimeRegisterTest {
+public class CriminalRecordsTest {
   private Realm realm;
 
   @Before
@@ -32,16 +31,16 @@ public class CrimeRegisterTest {
 
   @Test
   public void shouldPutCrimeInTheRegister() throws Exception {
-    CrimeRegister crimeRegister = new CrimeRegister(realm);
+    CriminalRecords criminalRecords = new CriminalRecords(realm);
     String crimeDetails = "crime details";
 
-    int id = crimeRegister.put(new Crime(crimeDetails));
+    int id = criminalRecords.add(new Crime(crimeDetails));
 
     assertThat(realm.where(Crime.class).findAll().size(), is(1));
 
     Crime persistedCrime = realm.where(Crime.class).findFirst();
     assertThat(id, is(1));
-    assertThat(persistedCrime.getDetails(), is(crimeDetails));
+    assertThat(persistedCrime.getFacts(), is(crimeDetails));
     assertThat(persistedCrime.getId(), is(1));
     Date date = persistedCrime.getDate();
 
