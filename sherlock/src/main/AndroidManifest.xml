@@ -7,7 +7,8 @@
     android:allowBackup="true"
     android:label="@string/app_name"
     android:supportsRtl="true"
+    android:theme="@style/SherlockTheme"
     tools:node="replace">
-    <activity android:name=".crashes.CrashesActivity"/>
+    <activity android:name=".crashes.CrashActivity"/>
   </application>
 </manifest>

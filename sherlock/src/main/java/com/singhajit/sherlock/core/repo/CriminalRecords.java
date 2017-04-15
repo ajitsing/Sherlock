@@ -1,7 +1,7 @@
 package com.singhajit.sherlock.core.repo;
 
-import com.singhajit.sherlock.core.realm.RealmSequenceGenerator;
 import com.singhajit.sherlock.core.investigation.Crime;
+import com.singhajit.sherlock.core.realm.RealmSequenceGenerator;
 
 import java.util.List;
 
@@ -26,5 +26,9 @@ public class CriminalRecords {
 
   public List<Crime> getAll() {
     return realm.where(Crime.class).findAllSorted("date", Sort.DESCENDING);
+  }
+
+  public Crime get(int id) {
+    return realm.where(Crime.class).equalTo("id", id).findFirst();
   }
 }

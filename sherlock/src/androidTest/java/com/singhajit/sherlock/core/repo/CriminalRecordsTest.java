@@ -1,9 +1,11 @@
 package com.singhajit.sherlock.core.repo;
 
+import com.singhajit.sherlock.RealmTestRule;
 import com.singhajit.sherlock.core.investigation.Crime;
 import com.singhajit.sherlock.core.realm.SherlockRealm;
 
 import org.junit.Before;
+import org.junit.Rule;
 import org.junit.Test;
 
 import java.util.Calendar;
@@ -20,14 +22,13 @@ import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
 
 public class CriminalRecordsTest {
+  @Rule
+  public RealmTestRule realmTestRule = new RealmTestRule();
   private Realm realm;
 
   @Before
   public void setUp() throws Exception {
     realm = SherlockRealm.create(getTargetContext());
-    realm.beginTransaction();
-    realm.deleteAll();
-    realm.commitTransaction();
   }
 
   @Test
@@ -72,5 +73,22 @@ public class CriminalRecordsTest {
     assertThat(crimes.get(0).getFacts(), is(facts2));
     assertThat(crimes.get(0).getPlaceOfCrime(), is(placeOfCrime));
     assertThat(crimes.get(1).getFacts(), is(facts1));
+  }
+
+  @Test
+  public void shouldGetCrimeById() throws Exception {
+    CriminalRecords criminalRecords = new CriminalRecords(realm);
+    String facts1 = "crime1 details";
+    String facts2 = "crime2 details";
+    String placeOfCrime = "Class1:1";
+
+    criminalRecords.add(new Crime("ImpactedArea", facts1));
+    criminalRecords.add(new Crime(placeOfCrime, facts2));
+
+    Crime crime = criminalRecords.get(2);
+
+    assertThat(crime.getId(), is(2));
+    assertThat(crime.getFacts(), is(facts2));
+    assertThat(crime.getPlaceOfCrime(), is(placeOfCrime));
   }
 }

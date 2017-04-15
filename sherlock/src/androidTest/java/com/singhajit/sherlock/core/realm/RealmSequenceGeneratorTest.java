@@ -1,6 +1,9 @@
 package com.singhajit.sherlock.core.realm;
 
+import com.singhajit.sherlock.RealmTestRule;
+
 import org.junit.Before;
+import org.junit.Rule;
 import org.junit.Test;
 
 import io.realm.Realm;
@@ -12,6 +15,8 @@ import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
 
 public class RealmSequenceGeneratorTest {
+  @Rule
+  public RealmTestRule realmTestRule = new RealmTestRule();
   private Realm realm;
 
   @Before
@@ -23,7 +28,6 @@ public class RealmSequenceGeneratorTest {
         .modules(new SherlockTestModule())
         .build();
     realm = Realm.getInstance(configuration);
-    cleanDB();
   }
 
   @Test
@@ -38,12 +42,6 @@ public class RealmSequenceGeneratorTest {
     model.setId(RealmSequenceGenerator.generate(realm, TestModel.class));
     saveModel(model);
     assertThat(RealmSequenceGenerator.generate(realm, TestModel.class), is(2));
-  }
-
-  private void cleanDB() {
-    realm.beginTransaction();
-    realm.deleteAll();
-    realm.commitTransaction();
   }
 
   private void saveModel(RealmObject object) {

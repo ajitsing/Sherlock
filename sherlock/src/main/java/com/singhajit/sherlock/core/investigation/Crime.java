@@ -1,5 +1,7 @@
 package com.singhajit.sherlock.core.investigation;
 
+import android.os.Parcel;
+
 import java.util.Date;
 
 import io.realm.RealmObject;
@@ -19,6 +21,12 @@ public class Crime extends RealmObject {
     this.placeOfCrime = placeOfCrime;
     this.facts = facts;
     this.date = new Date();
+  }
+
+  protected Crime(Parcel in) {
+    id = in.readInt();
+    placeOfCrime = in.readString();
+    facts = in.readString();
   }
 
   public void setId(int id) {
