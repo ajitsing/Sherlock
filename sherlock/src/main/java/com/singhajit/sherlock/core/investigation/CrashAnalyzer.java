@@ -6,19 +6,19 @@ import java.util.List;
 
 import static java.lang.String.format;
 
-public class CrimeSceneInvestigator {
+public class CrashAnalyzer {
 
   private final Thread thread;
   private final Throwable throwable;
 
-  public CrimeSceneInvestigator(Thread thread, Throwable throwable) {
+  public CrashAnalyzer(Thread thread, Throwable throwable) {
     this.thread = thread;
     this.throwable = throwable;
   }
 
-  public Crime investigate() {
+  public Crash getAnalysis() {
     StringBuilder factsBuilder = new StringBuilder();
-    String placeOfCrime = "";
+    String placeOfCrash = "";
 
     factsBuilder.append("Time: ");
     factsBuilder.append(new Date());
@@ -35,11 +35,11 @@ public class CrimeSceneInvestigator {
     if (throwable.getCause() != null) {
       StackTraceElement[] stackTrace = throwable.getCause().getStackTrace();
       StackTraceElement stackTraceElement = stackTrace[0];
-      placeOfCrime = format("%s:%d", stackTraceElement.getClassName(), stackTraceElement.getLineNumber());
+      placeOfCrash = format("%s:%d", stackTraceElement.getClassName(), stackTraceElement.getLineNumber());
       factsBuilder.append(stackTrace(stackTrace));
     }
 
-    return new Crime(placeOfCrime, factsBuilder.toString());
+    return new Crash(placeOfCrash, factsBuilder.toString());
   }
 
   private static String stackTrace(StackTraceElement[] stackTrace) {

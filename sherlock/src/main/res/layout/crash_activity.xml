@@ -8,7 +8,7 @@
 
     <variable
       name="viewModel"
-      type="com.singhajit.sherlock.core.investigation.CrimeViewModel"/>
+      type="com.singhajit.sherlock.core.investigation.CrashViewModel"/>
   </data>
 
   <ScrollView
@@ -102,7 +102,7 @@
                   android:layout_width="40dp"
                   android:layout_height="wrap_content"
                   android:scrollHorizontally="true"
-                  android:text="@{viewModel.facts}"
+                  android:text="@{viewModel.stackTrace}"
                   android:textColor="@color/cardview_dark_background"/>
               </HorizontalScrollView>
             </android.support.v7.widget.CardView>

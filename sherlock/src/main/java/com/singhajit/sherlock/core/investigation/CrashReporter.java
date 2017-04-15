@@ -12,16 +12,16 @@ import com.singhajit.sherlock.crashes.CrashActivity;
 
 import static android.app.PendingIntent.FLAG_UPDATE_CURRENT;
 
-public class CrimeReporter {
+public class CrashReporter {
   private final Context context;
 
-  public CrimeReporter(Context context) {
+  public CrashReporter(Context context) {
     this.context = context;
   }
 
-  public void report(CrimeViewModel crimeViewModel) {
+  public void report(CrashViewModel crashViewModel) {
     Intent crashActivityIntent = new Intent(context, CrashActivity.class);
-    crashActivityIntent.putExtra(CrashActivity.CRASH_ID, crimeViewModel.getIdentifier());
+    crashActivityIntent.putExtra(CrashActivity.CRASH_ID, crashViewModel.getIdentifier());
 
     TaskStackBuilder stackBuilder = TaskStackBuilder.create(context);
     stackBuilder.addParentStack(CrashActivity.class);
@@ -30,14 +30,14 @@ public class CrimeReporter {
     PendingIntent pendingIntent = stackBuilder.getPendingIntent(221, FLAG_UPDATE_CURRENT);
 
     Notification notification = new Notification.Builder(context)
-        .setContentTitle(crimeViewModel.getPlaceOfCrime())
-        .setContentText(crimeViewModel.getDate())
+        .setContentTitle(crashViewModel.getPlace())
+        .setContentText(crashViewModel.getDate())
         .setSmallIcon(R.mipmap.ic_stat_sherlock_logo)
         .setContentIntent(pendingIntent)
         .setAutoCancel(true)
         .build();
 
     NotificationManager notificationManager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
-    notificationManager.notify(crimeViewModel.getIdentifier(), notification);
+    notificationManager.notify(crashViewModel.getIdentifier(), notification);
   }
 }

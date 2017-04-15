@@ -1,8 +1,8 @@
 package com.singhajit.sherlock.crashes;
 
-import com.singhajit.sherlock.core.investigation.Crime;
-import com.singhajit.sherlock.core.investigation.CrimeViewModel;
-import com.singhajit.sherlock.core.repo.CriminalRecords;
+import com.singhajit.sherlock.core.investigation.Crash;
+import com.singhajit.sherlock.core.investigation.CrashViewModel;
+import com.singhajit.sherlock.core.repo.CrashReports;
 
 import org.junit.Test;
 
@@ -13,15 +13,15 @@ import static org.mockito.Mockito.when;
 public class CrashPresenterTest {
   @Test
   public void shouldInitializeCrashView() throws Exception {
-    CriminalRecords criminalRecords = mock(CriminalRecords.class);
-    Crime crime = mock(Crime.class);
-    when(criminalRecords.get(1)).thenReturn(crime);
-    CrashPresenter presenter = new CrashPresenter(criminalRecords, null);
+    CrashReports crashReports = mock(CrashReports.class);
+    Crash crash = mock(Crash.class);
+    when(crashReports.get(1)).thenReturn(crash);
+    CrashPresenter presenter = new CrashPresenter(crashReports, null);
 
-    CrimeViewModel viewModel = mock(CrimeViewModel.class);
+    CrashViewModel viewModel = mock(CrashViewModel.class);
     presenter.render(1, viewModel);
 
-    verify(viewModel).populate(crime);
+    verify(viewModel).populate(crash);
   }
 
   @Test
@@ -29,8 +29,8 @@ public class CrashPresenterTest {
     CrashActions actions = mock(CrashActions.class);
     CrashPresenter presenter = new CrashPresenter(null, actions);
 
-    CrimeViewModel viewModel = mock(CrimeViewModel.class);
-    when(viewModel.getFacts()).thenReturn("crashDetails");
+    CrashViewModel viewModel = mock(CrashViewModel.class);
+    when(viewModel.getStackTrace()).thenReturn("crashDetails");
 
     presenter.shareCrashDetails(viewModel);
 

@@ -1,24 +1,24 @@
 package com.singhajit.sherlock.crashes;
 
-import com.singhajit.sherlock.core.investigation.Crime;
-import com.singhajit.sherlock.core.investigation.CrimeViewModel;
-import com.singhajit.sherlock.core.repo.CriminalRecords;
+import com.singhajit.sherlock.core.investigation.Crash;
+import com.singhajit.sherlock.core.investigation.CrashViewModel;
+import com.singhajit.sherlock.core.repo.CrashReports;
 
 public class CrashPresenter {
-  private final CriminalRecords criminalRecords;
+  private final CrashReports crashReports;
   private final CrashActions actions;
 
-  public CrashPresenter(CriminalRecords criminalRecords, CrashActions actions) {
-    this.criminalRecords = criminalRecords;
+  public CrashPresenter(CrashReports crashReports, CrashActions actions) {
+    this.crashReports = crashReports;
     this.actions = actions;
   }
 
-  public void render(int crashId, CrimeViewModel crimeViewModel) {
-    Crime crime = criminalRecords.get(crashId);
-    crimeViewModel.populate(crime);
+  public void render(int crashId, CrashViewModel crashViewModel) {
+    Crash crash = crashReports.get(crashId);
+    crashViewModel.populate(crash);
   }
 
-  public void shareCrashDetails(CrimeViewModel viewModel) {
-    actions.openSendApplicationChooser(viewModel.getFacts());
+  public void shareCrashDetails(CrashViewModel viewModel) {
+    actions.openSendApplicationChooser(viewModel.getStackTrace());
   }
 }

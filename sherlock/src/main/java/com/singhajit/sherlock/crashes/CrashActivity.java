@@ -9,14 +9,14 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 import com.singhajit.sherlock.R;
-import com.singhajit.sherlock.core.investigation.CrimeViewModel;
+import com.singhajit.sherlock.core.investigation.CrashViewModel;
 import com.singhajit.sherlock.core.realm.SherlockRealm;
-import com.singhajit.sherlock.core.repo.CriminalRecords;
+import com.singhajit.sherlock.core.repo.CrashReports;
 import com.singhajit.sherlock.databinding.CrashBinding;
 
 public class CrashActivity extends AppCompatActivity implements CrashActions {
   public static final String CRASH_ID = "com.singhajit.sherlock.CRASH_ID";
-  private final CrimeViewModel viewModel = new CrimeViewModel();
+  private final CrashViewModel viewModel = new CrashViewModel();
   private CrashPresenter presenter;
 
   @Override
@@ -35,7 +35,7 @@ public class CrashActivity extends AppCompatActivity implements CrashActions {
     getSupportActionBar().setHomeButtonEnabled(true);
     getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-    presenter = new CrashPresenter(new CriminalRecords(SherlockRealm.create(this)), this);
+    presenter = new CrashPresenter(new CrashReports(SherlockRealm.create(this)), this);
     presenter.render(crashId, viewModel);
   }
 

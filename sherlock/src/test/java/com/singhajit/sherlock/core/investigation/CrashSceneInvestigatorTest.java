@@ -7,7 +7,7 @@ import static org.junit.Assert.assertThat;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
-public class CrimeSceneInvestigatorTest {
+public class CrashSceneInvestigatorTest {
   @Test
   public void shouldBuildStackTrace() throws Exception {
     Thread thread = new Thread("Main Thread");
@@ -24,10 +24,10 @@ public class CrimeSceneInvestigatorTest {
     when(throwable.getCause()).thenReturn(appThrowable);
     when(throwable.getStackTrace()).thenReturn(stackTraceElements);
 
-    CrimeSceneInvestigator investigator = new CrimeSceneInvestigator(thread, throwable);
+    CrashAnalyzer investigator = new CrashAnalyzer(thread, throwable);
 
-    Crime crime = investigator.investigate();
-    assertThat(crime.getFacts(), containsString("Thread: Main Thread\n" +
+    Crash crash = investigator.getAnalysis();
+    assertThat(crash.getStackTrace(), containsString("Thread: Main Thread\n" +
         "Message: Full Message\n" +
         "at Class1.method1(file1:1)\n" +
         "at Class2.method2(file2:2)\n\n" +
@@ -35,6 +35,6 @@ public class CrimeSceneInvestigatorTest {
         "at Class1.method1(file1:1)\n" +
         "at Class2.method2(file2:2)\n")
     );
-    assertThat(crime.getPlaceOfCrime(), containsString("Class2:2"));
+    assertThat(crash.getPlace(), containsString("Class2:2"));
   }
 }

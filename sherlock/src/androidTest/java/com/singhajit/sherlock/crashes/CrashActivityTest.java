@@ -5,9 +5,9 @@ import android.support.test.InstrumentationRegistry;
 import android.support.test.rule.ActivityTestRule;
 
 import com.singhajit.sherlock.RealmTestRule;
-import com.singhajit.sherlock.core.investigation.Crime;
+import com.singhajit.sherlock.core.investigation.Crash;
 import com.singhajit.sherlock.core.realm.SherlockRealm;
-import com.singhajit.sherlock.core.repo.CriminalRecords;
+import com.singhajit.sherlock.core.repo.CrashReports;
 
 import org.junit.Rule;
 import org.junit.Test;
@@ -30,8 +30,8 @@ public class CrashActivityTest {
   @Test
   public void shouldRenderCrashDetails() throws Exception {
     Realm realm = SherlockRealm.create(InstrumentationRegistry.getTargetContext());
-    CriminalRecords criminalRecords = new CriminalRecords(realm);
-    String placeOfCrime = "com.singhajit.Sherlock:10";
+    CrashReports crashReports = new CrashReports(realm);
+    String placeOfCrash = "com.singhajit.Sherlock:10";
     String statckTrace = "Thread: Main Thread\n" +
         "Message: Full Message\n" +
         "at Class1.method1(file1:1)\n" +
@@ -40,7 +40,7 @@ public class CrashActivityTest {
         "at Class1.method1(file1:1)\n" +
         "at Class2.method2(file2:2)\n";
 
-    criminalRecords.add(new Crime(placeOfCrime, statckTrace));
+    crashReports.add(new Crash(placeOfCrash, statckTrace));
 
     Intent intent = new Intent();
     intent.putExtra(CrashActivity.CRASH_ID, 1);

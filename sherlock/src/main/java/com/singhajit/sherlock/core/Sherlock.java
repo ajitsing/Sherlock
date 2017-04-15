@@ -2,33 +2,37 @@ package com.singhajit.sherlock.core;
 
 import android.content.Context;
 
-import com.singhajit.sherlock.core.investigation.Crime;
-import com.singhajit.sherlock.core.investigation.CrimeReporter;
-import com.singhajit.sherlock.core.investigation.CrimeSceneInvestigator;
-import com.singhajit.sherlock.core.investigation.CrimeViewModel;
+import com.singhajit.sherlock.core.investigation.Crash;
+import com.singhajit.sherlock.core.investigation.CrashAnalyzer;
+import com.singhajit.sherlock.core.investigation.CrashReporter;
+import com.singhajit.sherlock.core.investigation.CrashViewModel;
 import com.singhajit.sherlock.core.realm.SherlockRealm;
-import com.singhajit.sherlock.core.repo.CriminalRecords;
+import com.singhajit.sherlock.core.repo.CrashReports;
 
 public class Sherlock {
-  public static void startInvestigation(final Context context) {
+  private Sherlock() {
+  }
+
+  public static void initialize(final Context context) {
     final Thread.UncaughtExceptionHandler handler = Thread.getDefaultUncaughtExceptionHandler();
+
     Thread.setDefaultUncaughtExceptionHandler(new Thread.UncaughtExceptionHandler() {
       @Override
       public void uncaughtException(Thread thread, Throwable throwable) {
-        investigateAndCollectFacts(thread, throwable, context);
+        analyzeAndReportCrash(thread, throwable, context);
         handler.uncaughtException(thread, throwable);
       }
     });
   }
 
-  private static void investigateAndCollectFacts(Thread thread, Throwable throwable, Context context) {
-    CrimeSceneInvestigator crimeSceneInvestigator = new CrimeSceneInvestigator(thread, throwable);
-    Crime crime = crimeSceneInvestigator.investigate();
+  private static void analyzeAndReportCrash(Thread thread, Throwable throwable, Context context) {
+    CrashAnalyzer crashAnalyzer = new CrashAnalyzer(thread, throwable);
+    Crash crash = crashAnalyzer.getAnalysis();
 
-    CriminalRecords criminalRecords = new CriminalRecords(SherlockRealm.create(context));
-    criminalRecords.add(crime);
+    CrashReports crashReports = new CrashReports(SherlockRealm.create(context));
+    crashReports.add(crash);
 
-    CrimeReporter crimeReporter = new CrimeReporter(context);
-    crimeReporter.report(new CrimeViewModel(crime));
+    CrashReporter crashReporter = new CrashReporter(context);
+    crashReporter.report(new CrashViewModel(crash));
   }
 }
