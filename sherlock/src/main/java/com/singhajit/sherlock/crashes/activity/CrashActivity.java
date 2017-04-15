@@ -1,4 +1,4 @@
-package com.singhajit.sherlock.crashes;
+package com.singhajit.sherlock.crashes.activity;
 
 import android.content.Intent;
 import android.databinding.DataBindingUtil;
@@ -12,6 +12,8 @@ import com.singhajit.sherlock.R;
 import com.singhajit.sherlock.core.investigation.CrashViewModel;
 import com.singhajit.sherlock.core.realm.SherlockRealm;
 import com.singhajit.sherlock.core.repo.CrashReports;
+import com.singhajit.sherlock.crashes.action.CrashActions;
+import com.singhajit.sherlock.crashes.presenter.CrashPresenter;
 import com.singhajit.sherlock.databinding.CrashBinding;
 
 public class CrashActivity extends AppCompatActivity implements CrashActions {

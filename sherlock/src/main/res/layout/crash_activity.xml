@@ -46,7 +46,7 @@
         android:paddingLeft="5dp"
         android:paddingRight="5dp"
         android:paddingTop="8dp"
-        tools:context="com.singhajit.sherlock.crashes.CrashActivity">
+        tools:context="com.singhajit.sherlock.crashes.activity.CrashActivity">
 
         <android.support.v7.widget.CardView
           style="@style/CardViewStyle"

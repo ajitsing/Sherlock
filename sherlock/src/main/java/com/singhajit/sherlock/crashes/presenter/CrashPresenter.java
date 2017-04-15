@@ -1,8 +1,9 @@
-package com.singhajit.sherlock.crashes;
+package com.singhajit.sherlock.crashes.presenter;
 
 import com.singhajit.sherlock.core.investigation.Crash;
 import com.singhajit.sherlock.core.investigation.CrashViewModel;
 import com.singhajit.sherlock.core.repo.CrashReports;
+import com.singhajit.sherlock.crashes.action.CrashActions;
 
 public class CrashPresenter {
   private final CrashReports crashReports;

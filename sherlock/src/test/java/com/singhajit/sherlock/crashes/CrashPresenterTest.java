@@ -3,6 +3,8 @@ package com.singhajit.sherlock.crashes;
 import com.singhajit.sherlock.core.investigation.Crash;
 import com.singhajit.sherlock.core.investigation.CrashViewModel;
 import com.singhajit.sherlock.core.repo.CrashReports;
+import com.singhajit.sherlock.crashes.action.CrashActions;
+import com.singhajit.sherlock.crashes.presenter.CrashPresenter;
 
 import org.junit.Test;
 

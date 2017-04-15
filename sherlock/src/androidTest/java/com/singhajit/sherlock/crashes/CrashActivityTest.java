@@ -8,6 +8,7 @@ import com.singhajit.sherlock.RealmTestRule;
 import com.singhajit.sherlock.core.investigation.Crash;
 import com.singhajit.sherlock.core.realm.SherlockRealm;
 import com.singhajit.sherlock.core.repo.CrashReports;
+import com.singhajit.sherlock.crashes.activity.CrashActivity;
 
 import org.junit.Rule;
 import org.junit.Test;
@@ -32,7 +33,7 @@ public class CrashActivityTest {
     Realm realm = SherlockRealm.create(InstrumentationRegistry.getTargetContext());
     CrashReports crashReports = new CrashReports(realm);
     String placeOfCrash = "com.singhajit.Sherlock:10";
-    String statckTrace = "Thread: Main Thread\n" +
+    String stackTrace = "Thread: Main Thread\n" +
         "Message: Full Message\n" +
         "at Class1.method1(file1:1)\n" +
         "at Class2.method2(file2:2)\n\n" +
@@ -40,7 +41,7 @@ public class CrashActivityTest {
         "at Class1.method1(file1:1)\n" +
         "at Class2.method2(file2:2)\n";
 
-    crashReports.add(new Crash(placeOfCrash, statckTrace));
+    crashReports.add(new Crash(placeOfCrash, stackTrace));
 
     Intent intent = new Intent();
     intent.putExtra(CrashActivity.CRASH_ID, 1);
@@ -48,6 +49,6 @@ public class CrashActivityTest {
     rule.launchActivity(intent);
 
     onView(withText("com.singhajit.Sherlock:10")).check(matches(isDisplayed()));
-    onView(withText(statckTrace)).check(matches(isDisplayed()));
+    onView(withText(stackTrace)).check(matches(isDisplayed()));
   }
 }

@@ -8,7 +8,7 @@ import android.content.Intent;
 import android.support.v4.app.TaskStackBuilder;
 
 import com.singhajit.sherlock.R;
-import com.singhajit.sherlock.crashes.CrashActivity;
+import com.singhajit.sherlock.crashes.activity.CrashActivity;
 
 import static android.app.PendingIntent.FLAG_UPDATE_CURRENT;
 

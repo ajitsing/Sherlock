@@ -9,7 +9,10 @@
     android:supportsRtl="true"
     tools:node="replace">
     <activity
-      android:name=".crashes.CrashActivity"
+      android:name=".crashes.activity.CrashActivity"
+      android:theme="@style/SherlockTheme"/>
+    <activity
+      android:name=".crashes.activity.CrashListActivity"
       android:theme="@style/SherlockTheme"/>
   </application>
 </manifest>
