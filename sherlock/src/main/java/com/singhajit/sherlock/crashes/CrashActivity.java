@@ -4,6 +4,8 @@ import android.content.Intent;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
+import android.view.MenuItem;
 
 import com.singhajit.sherlock.R;
 import com.singhajit.sherlock.core.investigation.CrimeViewModel;
@@ -24,7 +26,23 @@ public class CrashActivity extends AppCompatActivity {
     CrimeViewModel viewModel = new CrimeViewModel();
     binding.setViewModel(viewModel);
 
+    Toolbar toolbar = binding.toolbar;
+    setSupportActionBar(toolbar);
+    setTitle(R.string.crash_report);
+
+    getSupportActionBar().setHomeButtonEnabled(true);
+    getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
     CrashPresenter presenter = new CrashPresenter(new CriminalRecords(SherlockRealm.create(this)));
     presenter.render(crashId, viewModel);
+  }
+
+  @Override
+  public boolean onOptionsItemSelected(MenuItem item) {
+    if (item.getItemId() == android.R.id.home) {
+      onBackPressed();
+      return true;
+    }
+    return super.onOptionsItemSelected(item);
   }
 }

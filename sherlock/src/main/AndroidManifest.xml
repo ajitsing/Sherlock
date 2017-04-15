@@ -8,6 +8,8 @@
     android:label="@string/app_name"
     android:supportsRtl="true"
     tools:node="replace">
-    <activity android:name=".crashes.CrashActivity"/>
+    <activity
+      android:name=".crashes.CrashActivity"
+      android:theme="@style/SherlockTheme"/>
   </application>
 </manifest>
