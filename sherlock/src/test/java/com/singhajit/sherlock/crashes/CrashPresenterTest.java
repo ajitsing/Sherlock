@@ -16,11 +16,24 @@ public class CrashPresenterTest {
     CriminalRecords criminalRecords = mock(CriminalRecords.class);
     Crime crime = mock(Crime.class);
     when(criminalRecords.get(1)).thenReturn(crime);
-    CrashPresenter presenter = new CrashPresenter(criminalRecords);
+    CrashPresenter presenter = new CrashPresenter(criminalRecords, null);
 
     CrimeViewModel viewModel = mock(CrimeViewModel.class);
     presenter.render(1, viewModel);
 
     verify(viewModel).populate(crime);
+  }
+
+  @Test
+  public void shouldShareCrashDetails() throws Exception {
+    CrashActions actions = mock(CrashActions.class);
+    CrashPresenter presenter = new CrashPresenter(null, actions);
+
+    CrimeViewModel viewModel = mock(CrimeViewModel.class);
+    when(viewModel.getFacts()).thenReturn("crashDetails");
+
+    presenter.shareCrashDetails(viewModel);
+
+    verify(actions).openSendApplicationChooser("crashDetails");
   }
 }

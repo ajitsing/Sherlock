@@ -2,4 +2,6 @@
   <string name="app_name">Sherlock</string>
   <string name="stack_trace">Stack Trace</string>
   <string name="crash_report">Crash Report</string>
+  <string name="share">Share</string>
+  <string name="share_dialog_message">Share Crash Using</string>
 </resources>
