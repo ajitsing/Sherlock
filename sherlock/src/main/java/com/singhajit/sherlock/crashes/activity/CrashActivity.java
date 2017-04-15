@@ -3,7 +3,6 @@ package com.singhajit.sherlock.crashes.activity;
 import android.content.Intent;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -16,7 +15,7 @@ import com.singhajit.sherlock.crashes.action.CrashActions;
 import com.singhajit.sherlock.crashes.presenter.CrashPresenter;
 import com.singhajit.sherlock.databinding.CrashBinding;
 
-public class CrashActivity extends AppCompatActivity implements CrashActions {
+public class CrashActivity extends BaseActivity implements CrashActions {
   public static final String CRASH_ID = "com.singhajit.sherlock.CRASH_ID";
   private final CrashViewModel viewModel = new CrashViewModel();
   private CrashPresenter presenter;
@@ -28,14 +27,10 @@ public class CrashActivity extends AppCompatActivity implements CrashActions {
     int crashId = intent.getIntExtra(CRASH_ID, -1);
     CrashBinding binding = DataBindingUtil.setContentView(this, R.layout.crash_activity);
 
-    binding.setViewModel(viewModel);
-
-    Toolbar toolbar = binding.toolbar;
-    setSupportActionBar(toolbar);
+    enableHomeButton(binding.toolbar);
     setTitle(R.string.crash_report);
 
-    getSupportActionBar().setHomeButtonEnabled(true);
-    getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+    binding.setViewModel(viewModel);
 
     presenter = new CrashPresenter(new CrashReports(SherlockRealm.create(this)), this);
     presenter.render(crashId, viewModel);
@@ -49,10 +44,7 @@ public class CrashActivity extends AppCompatActivity implements CrashActions {
 
   @Override
   public boolean onOptionsItemSelected(MenuItem item) {
-    if (item.getItemId() == android.R.id.home) {
-      onBackPressed();
-      return true;
-    } else if (item.getItemId() == R.id.share) {
+    if (item.getItemId() == R.id.share) {
       presenter.shareCrashDetails(viewModel);
       return true;
     }
