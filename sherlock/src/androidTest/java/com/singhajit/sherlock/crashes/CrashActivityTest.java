@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.support.test.InstrumentationRegistry;
 import android.support.test.rule.ActivityTestRule;
 
+import com.singhajit.sherlock.R;
 import com.singhajit.sherlock.RealmResetRule;
 import com.singhajit.sherlock.core.investigation.Crash;
 import com.singhajit.sherlock.core.realm.SherlockRealm;
@@ -16,6 +17,7 @@ import org.junit.Test;
 import io.realm.Realm;
 
 import static android.support.test.espresso.Espresso.onView;
+import static android.support.test.espresso.action.ViewActions.scrollTo;
 import static android.support.test.espresso.assertion.ViewAssertions.matches;
 import static android.support.test.espresso.matcher.ViewMatchers.isDisplayed;
 import static android.support.test.espresso.matcher.ViewMatchers.withText;
@@ -51,5 +53,9 @@ public class CrashActivityTest {
     onView(withText("com.singhajit.Sherlock:10")).check(matches(isDisplayed()));
     onView(withText("Reason of crash")).check(matches(isDisplayed()));
     onView(withText(stackTrace)).check(matches(isDisplayed()));
+
+    onView(withText(R.string.android_api_version)).perform(scrollTo()).check(matches(isDisplayed()));
+    onView(withText(R.string.name)).check(matches(isDisplayed()));
+    onView(withText(R.string.brand)).check(matches(isDisplayed()));
   }
 }

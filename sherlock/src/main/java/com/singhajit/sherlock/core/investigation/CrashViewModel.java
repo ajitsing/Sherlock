@@ -29,6 +29,22 @@ public class CrashViewModel {
     return crash.getStackTrace();
   }
 
+  public String getDeviceManufacturer() {
+    return crash.getDeviceInfo().getManufacturer();
+  }
+
+  public String getDeviceName() {
+    return crash.getDeviceInfo().getName();
+  }
+
+  public String getDeviceAndroidApiVersion() {
+    return crash.getDeviceInfo().getSdk();
+  }
+
+  public String getDeviceBrand() {
+    return crash.getDeviceInfo().getBrand();
+  }
+
   public int getIdentifier() {
     return crash.getId();
   }
