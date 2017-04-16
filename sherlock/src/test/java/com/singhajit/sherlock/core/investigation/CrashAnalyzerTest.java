@@ -10,7 +10,6 @@ import static org.mockito.Mockito.when;
 public class CrashAnalyzerTest {
   @Test
   public void shouldBuildStackTrace() throws Exception {
-    Thread thread = new Thread("Main Thread");
     Throwable throwable = mock(Throwable.class);
     when(throwable.getLocalizedMessage()).thenReturn("Full Message");
 

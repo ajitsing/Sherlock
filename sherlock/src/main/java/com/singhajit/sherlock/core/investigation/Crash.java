@@ -1,5 +1,7 @@
 package com.singhajit.sherlock.core.investigation;
 
+import com.singhajit.sherlock.core.Sherlock;
+
 import java.util.Date;
 
 import io.realm.RealmObject;
@@ -8,6 +10,8 @@ import io.realm.annotations.PrimaryKey;
 public class Crash extends RealmObject {
   @PrimaryKey
   private int id;
+  private DeviceInfo deviceInfo;
+  private AppInfo appInfo;
   private String place;
   private String reason;
   private String stackTrace;
@@ -21,6 +25,18 @@ public class Crash extends RealmObject {
     this.stackTrace = stackTrace;
     this.reason = reason;
     this.date = new Date();
+    this.deviceInfo = DeviceInfoProvider.getDeviceInfo();
+    if (Sherlock.isInitialized()) {
+      this.appInfo = Sherlock.getInstance().getAppInfoProvider().getAppInfo();
+    }
+  }
+
+  public DeviceInfo getDeviceInfo() {
+    return deviceInfo;
+  }
+
+  public AppInfo getAppInfo() {
+    return appInfo;
   }
 
   public void setId(int id) {

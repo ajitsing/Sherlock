@@ -3,10 +3,12 @@ package com.singhajit.sherlock.core;
 import android.content.Context;
 import android.util.Log;
 
+import com.singhajit.sherlock.core.investigation.AppInfoProvider;
 import com.singhajit.sherlock.core.investigation.Crash;
 import com.singhajit.sherlock.core.investigation.CrashAnalyzer;
 import com.singhajit.sherlock.core.investigation.CrashReporter;
 import com.singhajit.sherlock.core.investigation.CrashViewModel;
+import com.singhajit.sherlock.core.investigation.DefaultAppInfoProvider;
 import com.singhajit.sherlock.core.realm.SherlockRealm;
 import com.singhajit.sherlock.core.repo.CrashReports;
 
@@ -38,8 +40,12 @@ public class Sherlock {
     });
   }
 
+  public static boolean isInitialized() {
+    return instance != null;
+  }
+
   public static Sherlock getInstance() {
-    if (instance == null) {
+    if (!isInitialized()) {
       throw new SherlockNotInitializedException();
     }
     Log.d(TAG, "Returning existing instance...");
@@ -57,5 +63,9 @@ public class Sherlock {
     instance.crashReports.add(crash);
     instance.crashReporter.report(new CrashViewModel(crash));
     Log.d(TAG, "Crash analysis completed!");
+  }
+
+  public AppInfoProvider getAppInfoProvider() {
+    return new DefaultAppInfoProvider();
   }
 }
