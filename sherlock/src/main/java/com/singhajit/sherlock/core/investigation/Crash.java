@@ -1,7 +1,5 @@
 package com.singhajit.sherlock.core.investigation;
 
-import android.os.Parcel;
-
 import java.util.Date;
 
 import io.realm.RealmObject;
@@ -11,22 +9,18 @@ public class Crash extends RealmObject {
   @PrimaryKey
   private int id;
   private String place;
+  private String reason;
   private String stackTrace;
   private Date date;
 
   public Crash() {
   }
 
-  public Crash(String place, String stackTrace) {
+  public Crash(String place, String reason, String stackTrace) {
     this.place = place;
     this.stackTrace = stackTrace;
+    this.reason = reason;
     this.date = new Date();
-  }
-
-  protected Crash(Parcel in) {
-    id = in.readInt();
-    place = in.readString();
-    stackTrace = in.readString();
   }
 
   public void setId(int id) {
@@ -35,6 +29,10 @@ public class Crash extends RealmObject {
 
   public Class<Crash> getType() {
     return Crash.class;
+  }
+
+  public String getReason() {
+    return reason;
   }
 
   public String getStackTrace() {

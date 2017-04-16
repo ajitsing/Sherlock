@@ -37,7 +37,7 @@ public class CrashReportsTest {
     String crashDetails = "crash details";
     String placeOfCrash = "Crash:23";
 
-    int id = crashReports.add(new Crash(placeOfCrash, crashDetails));
+    int id = crashReports.add(new Crash(placeOfCrash, "Reason of crash", crashDetails));
 
     assertThat(realm.where(Crash.class).findAll().size(), is(1));
 
@@ -64,8 +64,8 @@ public class CrashReportsTest {
     String facts2 = "crash2 details";
     String placeOfCrash = "Class1:1";
 
-    crashReports.add(new Crash("ImpactedArea", facts1));
-    crashReports.add(new Crash(placeOfCrash, facts2));
+    crashReports.add(new Crash("ImpactedArea", "Reason of crash", facts1));
+    crashReports.add(new Crash(placeOfCrash, "Reason of crash", facts2));
 
     List<Crash> crashes = crashReports.getAll();
 
@@ -82,8 +82,8 @@ public class CrashReportsTest {
     String facts2 = "crash2 details";
     String placeOfCrash = "Class1:1";
 
-    crashReports.add(new Crash("ImpactedArea", facts1));
-    crashReports.add(new Crash(placeOfCrash, facts2));
+    crashReports.add(new Crash("ImpactedArea", "Reason of crash", facts1));
+    crashReports.add(new Crash(placeOfCrash, "Reason of crash", facts2));
 
     Crash crash = crashReports.get(2);
 

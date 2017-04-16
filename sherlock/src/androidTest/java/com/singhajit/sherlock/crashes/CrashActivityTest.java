@@ -41,7 +41,7 @@ public class CrashActivityTest {
         "at Class1.method1(file1:1)\n" +
         "at Class2.method2(file2:2)\n";
 
-    crashReports.add(new Crash(placeOfCrash, stackTrace));
+    crashReports.add(new Crash(placeOfCrash, "Reason of crash", stackTrace));
 
     Intent intent = new Intent();
     intent.putExtra(CrashActivity.CRASH_ID, 1);

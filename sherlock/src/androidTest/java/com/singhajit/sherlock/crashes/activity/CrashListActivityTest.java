@@ -21,7 +21,6 @@ import org.junit.Test;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.concurrent.TimeUnit;
 
 import io.realm.Realm;
 
@@ -55,8 +54,8 @@ public class CrashListActivityTest {
     String placeOfCrash2 = "com.singhajit.SherlockAssistant:5";
     String stackTrace2 = "Crash 2 details";
 
-    crashReports.add(new Crash(placeOfCrash1, stackTrace1));
-    crashReports.add(new Crash(placeOfCrash2, stackTrace2));
+    crashReports.add(new Crash(placeOfCrash1, "Reason of crash", stackTrace1));
+    crashReports.add(new Crash(placeOfCrash2, "Reason of crash", stackTrace2));
 
     rule.launchActivity(null);
     SimpleDateFormat simpleDateFormat = new SimpleDateFormat("MMM d, yyyy");
@@ -79,7 +78,7 @@ public class CrashListActivityTest {
     String placeOfCrash1 = "com.singhajit.Sherlock:10";
     String stackTrace1 = "Crash 1 details";
 
-    crashReports.add(new Crash(placeOfCrash1, stackTrace1));
+    crashReports.add(new Crash(placeOfCrash1, "Reason of crash", stackTrace1));
 
     rule.launchActivity(null);
 

@@ -26,7 +26,7 @@ public class Sherlock {
   }
 
   private static void analyzeAndReportCrash(Thread thread, Throwable throwable, Context context) {
-    CrashAnalyzer crashAnalyzer = new CrashAnalyzer(thread, throwable);
+    CrashAnalyzer crashAnalyzer = new CrashAnalyzer(throwable);
     Crash crash = crashAnalyzer.getAnalysis();
 
     CrashReports crashReports = new CrashReports(SherlockRealm.create(context));

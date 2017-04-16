@@ -1,18 +1,15 @@
 package com.singhajit.sherlock.core.investigation;
 
 import java.util.Arrays;
-import java.util.Date;
 import java.util.List;
 
 import static java.lang.String.format;
 
 public class CrashAnalyzer {
 
-  private final Thread thread;
   private final Throwable throwable;
 
-  public CrashAnalyzer(Thread thread, Throwable throwable) {
-    this.thread = thread;
+  public CrashAnalyzer(Throwable throwable) {
     this.throwable = throwable;
   }
 
@@ -20,13 +17,6 @@ public class CrashAnalyzer {
     StringBuilder factsBuilder = new StringBuilder();
     String placeOfCrash = "";
 
-    factsBuilder.append("Time: ");
-    factsBuilder.append(new Date());
-    factsBuilder.append("\n");
-    factsBuilder.append("Thread: ");
-    factsBuilder.append(thread.getName());
-    factsBuilder.append("\n");
-    factsBuilder.append("Message: ");
     factsBuilder.append(throwable.getLocalizedMessage());
     factsBuilder.append("\n");
     factsBuilder.append(stackTrace(throwable.getStackTrace()));
@@ -39,7 +29,7 @@ public class CrashAnalyzer {
       factsBuilder.append(stackTrace(stackTrace));
     }
 
-    return new Crash(placeOfCrash, factsBuilder.toString());
+    return new Crash(placeOfCrash, throwable.getLocalizedMessage(), factsBuilder.toString());
   }
 
   private static String stackTrace(StackTraceElement[] stackTrace) {
