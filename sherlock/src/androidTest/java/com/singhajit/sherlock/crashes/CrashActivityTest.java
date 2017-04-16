@@ -4,7 +4,7 @@ import android.content.Intent;
 import android.support.test.InstrumentationRegistry;
 import android.support.test.rule.ActivityTestRule;
 
-import com.singhajit.sherlock.RealmTestRule;
+import com.singhajit.sherlock.RealmResetRule;
 import com.singhajit.sherlock.core.investigation.Crash;
 import com.singhajit.sherlock.core.realm.SherlockRealm;
 import com.singhajit.sherlock.core.repo.CrashReports;
@@ -23,7 +23,7 @@ import static android.support.test.espresso.matcher.ViewMatchers.withText;
 public class CrashActivityTest {
 
   @Rule
-  public RealmTestRule realmTestRule = new RealmTestRule();
+  public RealmResetRule realmResetRule = new RealmResetRule();
 
   @Rule
   public ActivityTestRule<CrashActivity> rule = new ActivityTestRule<>(CrashActivity.class, true, false);

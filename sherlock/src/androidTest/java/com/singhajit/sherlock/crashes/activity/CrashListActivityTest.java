@@ -9,7 +9,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 
 import com.singhajit.sherlock.R;
-import com.singhajit.sherlock.RealmTestRule;
+import com.singhajit.sherlock.RealmResetRule;
 import com.singhajit.sherlock.core.investigation.Crash;
 import com.singhajit.sherlock.core.realm.SherlockRealm;
 import com.singhajit.sherlock.core.repo.CrashReports;
@@ -39,7 +39,7 @@ import static org.hamcrest.Matchers.containsString;
 
 public class CrashListActivityTest {
   @Rule
-  public RealmTestRule realmTestRule = new RealmTestRule();
+  public RealmResetRule realmResetRule = new RealmResetRule();
 
   @Rule
   public IntentsTestRule<CrashListActivity> rule = new IntentsTestRule<>(CrashListActivity.class, true, false);

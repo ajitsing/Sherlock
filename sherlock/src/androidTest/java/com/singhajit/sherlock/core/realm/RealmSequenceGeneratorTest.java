@@ -1,6 +1,6 @@
 package com.singhajit.sherlock.core.realm;
 
-import com.singhajit.sherlock.RealmTestRule;
+import com.singhajit.sherlock.RealmResetRule;
 
 import org.junit.Before;
 import org.junit.Rule;
@@ -16,7 +16,7 @@ import static org.junit.Assert.assertThat;
 
 public class RealmSequenceGeneratorTest {
   @Rule
-  public RealmTestRule realmTestRule = new RealmTestRule();
+  public RealmResetRule realmResetRule = new RealmResetRule();
   private Realm realm;
 
   @Before

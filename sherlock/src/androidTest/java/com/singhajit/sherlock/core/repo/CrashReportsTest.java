@@ -1,6 +1,6 @@
 package com.singhajit.sherlock.core.repo;
 
-import com.singhajit.sherlock.RealmTestRule;
+import com.singhajit.sherlock.RealmResetRule;
 import com.singhajit.sherlock.core.investigation.Crash;
 import com.singhajit.sherlock.core.realm.SherlockRealm;
 
@@ -23,7 +23,7 @@ import static org.junit.Assert.assertThat;
 
 public class CrashReportsTest {
   @Rule
-  public RealmTestRule realmTestRule = new RealmTestRule();
+  public RealmResetRule realmResetRule = new RealmResetRule();
   private Realm realm;
 
   @Before

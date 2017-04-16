@@ -1,6 +1,7 @@
 package com.singhajit.sherlock.core;
 
 import android.content.Context;
+import android.util.Log;
 
 import com.singhajit.sherlock.core.investigation.Crash;
 import com.singhajit.sherlock.core.investigation.CrashAnalyzer;
@@ -9,30 +10,52 @@ import com.singhajit.sherlock.core.investigation.CrashViewModel;
 import com.singhajit.sherlock.core.realm.SherlockRealm;
 import com.singhajit.sherlock.core.repo.CrashReports;
 
+import java.util.List;
+
 public class Sherlock {
-  private Sherlock() {
+  private static final String TAG = Sherlock.class.getSimpleName();
+  private static Sherlock instance;
+  private final CrashReports crashReports;
+  private final CrashReporter crashReporter;
+
+  private Sherlock(Context context) {
+    crashReports = new CrashReports(SherlockRealm.create(context));
+    crashReporter = new CrashReporter(context);
   }
 
-  public static void initialize(final Context context) {
+  public static void init(final Context context) {
+    Log.d(TAG, "Initializing Sherlock...");
+    instance = new Sherlock(context);
+
     final Thread.UncaughtExceptionHandler handler = Thread.getDefaultUncaughtExceptionHandler();
 
     Thread.setDefaultUncaughtExceptionHandler(new Thread.UncaughtExceptionHandler() {
       @Override
       public void uncaughtException(Thread thread, Throwable throwable) {
-        analyzeAndReportCrash(thread, throwable, context);
+        analyzeAndReportCrash(throwable);
         handler.uncaughtException(thread, throwable);
       }
     });
   }
 
-  private static void analyzeAndReportCrash(Thread thread, Throwable throwable, Context context) {
+  public static Sherlock getInstance() {
+    if (instance == null) {
+      throw new SherlockNotInitializedException();
+    }
+    Log.d(TAG, "Returning existing instance...");
+    return instance;
+  }
+
+  public List<Crash> getAllCrashes() {
+    return crashReports.getAll();
+  }
+
+  private static void analyzeAndReportCrash(Throwable throwable) {
+    Log.d(TAG, "Analyzing Crash...");
     CrashAnalyzer crashAnalyzer = new CrashAnalyzer(throwable);
     Crash crash = crashAnalyzer.getAnalysis();
-
-    CrashReports crashReports = new CrashReports(SherlockRealm.create(context));
-    crashReports.add(crash);
-
-    CrashReporter crashReporter = new CrashReporter(context);
-    crashReporter.report(new CrashViewModel(crash));
+    instance.crashReports.add(crash);
+    instance.crashReporter.report(new CrashViewModel(crash));
+    Log.d(TAG, "Crash analysis completed!");
   }
 }

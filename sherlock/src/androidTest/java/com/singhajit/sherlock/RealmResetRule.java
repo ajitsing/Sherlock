@@ -10,7 +10,7 @@ import org.junit.runners.model.Statement;
 
 import io.realm.Realm;
 
-public class RealmTestRule implements TestRule {
+public class RealmResetRule implements TestRule {
   @Override
   public Statement apply(final Statement base, Description description) {
     return new Statement() {
