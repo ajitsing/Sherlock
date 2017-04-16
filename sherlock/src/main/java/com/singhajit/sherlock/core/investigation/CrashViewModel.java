@@ -42,6 +42,13 @@ public class CrashViewModel {
     crashInfo.append("Android API: ");
     crashInfo.append(getDeviceAndroidApiVersion() + "\n\n");
 
+    crashInfo.append("App Info:\n");
+    crashInfo.append("Version: ");
+    crashInfo.append(getAppInfo().getVersion() + "\n");
+
+    crashInfo.append("Details: ");
+    crashInfo.append(getAppInfo().getDetails() + "\n\n");
+
     crashInfo.append("StackTrace:\n");
     crashInfo.append(getStackTrace() + "\n");
 

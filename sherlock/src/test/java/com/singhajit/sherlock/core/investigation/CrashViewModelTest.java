@@ -52,12 +52,20 @@ public class CrashViewModelTest {
     when(deviceInfo.getSdk()).thenReturn("21");
     when(crash.getDeviceInfo()).thenReturn(deviceInfo);
 
+    AppInfo appInfo = mock(AppInfo.class);
+    when(appInfo.getVersion()).thenReturn("2.21");
+    when(appInfo.getDetails()).thenReturn("Build Number: 221");
+    when(crash.getAppInfo()).thenReturn(appInfo);
+
     CrashViewModel viewModel = new CrashViewModel(crash);
 
     assertThat(viewModel.getCrashInfo(), is("Device Info:\n" +
         "Name: Moto X Play\n" +
         "Brand: Motorola\n" +
         "Android API: 21\n\n" +
+        "App Info:\n" +
+        "Version: 2.21\n" +
+        "Details: Build Number: 221\n\n" +
         "StackTrace:\nStackTrace\n")
     );
   }
