@@ -20,6 +20,6 @@ public class CrashPresenter {
   }
 
   public void shareCrashDetails(CrashViewModel viewModel) {
-    actions.openSendApplicationChooser(viewModel.getStackTrace());
+    actions.openSendApplicationChooser(viewModel.getCrashInfo());
   }
 }

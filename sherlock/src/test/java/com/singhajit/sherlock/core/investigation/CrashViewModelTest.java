@@ -41,4 +41,24 @@ public class CrashViewModelTest {
 
     assertThat(viewModel.getIdentifier(), is(1));
   }
+
+  @Test
+  public void shouldReturnCrashInfoIncludingDeviceInfoAndStackTrace() throws Exception {
+    Crash crash = mock(Crash.class);
+    when(crash.getStackTrace()).thenReturn("StackTrace");
+    DeviceInfo deviceInfo = mock(DeviceInfo.class);
+    when(deviceInfo.getBrand()).thenReturn("Motorola");
+    when(deviceInfo.getName()).thenReturn("Moto X Play");
+    when(deviceInfo.getSdk()).thenReturn("21");
+    when(crash.getDeviceInfo()).thenReturn(deviceInfo);
+
+    CrashViewModel viewModel = new CrashViewModel(crash);
+
+    assertThat(viewModel.getCrashInfo(), is("Device Info:\n" +
+        "Name: Moto X Play\n" +
+        "Brand: Motorola\n" +
+        "Android API: 21\n\n" +
+        "StackTrace:\nStackTrace\n")
+    );
+  }
 }

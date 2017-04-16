@@ -29,6 +29,25 @@ public class CrashViewModel {
     return crash.getStackTrace();
   }
 
+  public String getCrashInfo() {
+    StringBuilder crashInfo = new StringBuilder();
+    crashInfo.append("Device Info:\n");
+
+    crashInfo.append("Name: ");
+    crashInfo.append(getDeviceName() + "\n");
+
+    crashInfo.append("Brand: ");
+    crashInfo.append(getDeviceBrand() + "\n");
+
+    crashInfo.append("Android API: ");
+    crashInfo.append(getDeviceAndroidApiVersion() + "\n\n");
+
+    crashInfo.append("StackTrace:\n");
+    crashInfo.append(getStackTrace() + "\n");
+
+    return crashInfo.toString();
+  }
+
   public String getDeviceManufacturer() {
     return crash.getDeviceInfo().getManufacturer();
   }

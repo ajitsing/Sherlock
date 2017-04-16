@@ -32,7 +32,7 @@ public class CrashPresenterTest {
     CrashPresenter presenter = new CrashPresenter(null, actions);
 
     CrashViewModel viewModel = mock(CrashViewModel.class);
-    when(viewModel.getStackTrace()).thenReturn("crashDetails");
+    when(viewModel.getCrashInfo()).thenReturn("crashDetails");
 
     presenter.shareCrashDetails(viewModel);
 
