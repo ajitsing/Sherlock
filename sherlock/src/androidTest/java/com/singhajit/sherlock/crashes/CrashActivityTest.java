@@ -49,6 +49,7 @@ public class CrashActivityTest {
     rule.launchActivity(intent);
 
     onView(withText("com.singhajit.Sherlock:10")).check(matches(isDisplayed()));
+    onView(withText("Reason of crash")).check(matches(isDisplayed()));
     onView(withText(stackTrace)).check(matches(isDisplayed()));
   }
 }

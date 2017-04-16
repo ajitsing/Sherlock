@@ -21,6 +21,10 @@ public class CrashViewModel {
     return crash.getPlace();
   }
 
+  public String getReasonOfCrash() {
+    return crash.getReason();
+  }
+
   public String getStackTrace() {
     return crash.getStackTrace();
   }
