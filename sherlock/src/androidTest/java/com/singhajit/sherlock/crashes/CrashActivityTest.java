@@ -57,5 +57,7 @@ public class CrashActivityTest {
     onView(withText(R.string.android_api_version)).perform(scrollTo()).check(matches(isDisplayed()));
     onView(withText(R.string.name)).check(matches(isDisplayed()));
     onView(withText(R.string.brand)).check(matches(isDisplayed()));
+
+    onView(withText(R.string.about_app)).perform(scrollTo()).check(matches(isDisplayed()));
   }
 }

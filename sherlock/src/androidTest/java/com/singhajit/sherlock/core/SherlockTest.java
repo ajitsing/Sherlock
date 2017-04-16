@@ -4,6 +4,8 @@ import android.content.Context;
 import android.support.test.InstrumentationRegistry;
 
 import com.singhajit.sherlock.RealmResetRule;
+import com.singhajit.sherlock.core.investigation.AppInfo;
+import com.singhajit.sherlock.core.investigation.AppInfoProvider;
 import com.singhajit.sherlock.core.investigation.Crash;
 import com.singhajit.sherlock.core.realm.SherlockRealm;
 import com.singhajit.sherlock.core.repo.CrashReports;
@@ -42,5 +44,24 @@ public class SherlockTest {
     List<Crash> allCrashes = Sherlock.getInstance().getAllCrashes();
 
     assertThat(allCrashes.size(), is(2));
+  }
+
+  @Test
+  public void shouldSetAppInfoProvider() throws Exception {
+    Context targetContext = InstrumentationRegistry.getTargetContext();
+    Sherlock.init(targetContext);
+
+    final String version = "2.21";
+    final String details = "BuildNumber: 221B";
+    Sherlock.setAppInfoProvider(new AppInfoProvider() {
+      @Override
+      public AppInfo getAppInfo() {
+        return new AppInfo(version, details);
+      }
+    });
+
+    AppInfo appInfo = Sherlock.getInstance().getAppInfoProvider().getAppInfo();
+    assertThat(appInfo.getVersion(), is(version));
+    assertThat(appInfo.getDetails(), is(details));
   }
 }

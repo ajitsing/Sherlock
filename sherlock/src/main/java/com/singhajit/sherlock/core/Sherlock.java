@@ -19,10 +19,12 @@ public class Sherlock {
   private static Sherlock instance;
   private final CrashReports crashReports;
   private final CrashReporter crashReporter;
+  private AppInfoProvider appInfoProvider;
 
   private Sherlock(Context context) {
     crashReports = new CrashReports(SherlockRealm.create(context));
     crashReporter = new CrashReporter(context);
+    appInfoProvider = new DefaultAppInfoProvider(context);
   }
 
   public static void init(final Context context) {
@@ -53,7 +55,7 @@ public class Sherlock {
   }
 
   public List<Crash> getAllCrashes() {
-    return crashReports.getAll();
+    return getInstance().crashReports.getAll();
   }
 
   private static void analyzeAndReportCrash(Throwable throwable) {
@@ -65,7 +67,11 @@ public class Sherlock {
     Log.d(TAG, "Crash analysis completed!");
   }
 
+  public static void setAppInfoProvider(AppInfoProvider appInfoProvider) {
+    getInstance().appInfoProvider = appInfoProvider;
+  }
+
   public AppInfoProvider getAppInfoProvider() {
-    return new DefaultAppInfoProvider();
+    return getInstance().appInfoProvider;
   }
 }

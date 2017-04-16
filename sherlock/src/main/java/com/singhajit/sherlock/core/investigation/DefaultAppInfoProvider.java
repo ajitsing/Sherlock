@@ -1,13 +1,26 @@
 package com.singhajit.sherlock.core.investigation;
 
-import android.support.compat.BuildConfig;
+import android.content.Context;
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager;
 
 public class DefaultAppInfoProvider implements AppInfoProvider {
+  private final Context context;
+
+  public DefaultAppInfoProvider(Context context) {
+    this.context = context;
+  }
+
   @Override
   public AppInfo getAppInfo() {
-    return new AppInfo.Builder()
-        .withVersionName(BuildConfig.VERSION_NAME)
-        .withVersionCode(BuildConfig.VERSION_CODE)
-        .build();
+    AppInfo.Builder appInfoBuilder = new AppInfo.Builder();
+    try {
+      PackageInfo packageInfo = context.getPackageManager().getPackageInfo(context.getPackageName(), 0);
+      appInfoBuilder.withVersionName(packageInfo.versionName);
+    } catch (PackageManager.NameNotFoundException e) {
+
+    }
+
+    return appInfoBuilder.build();
   }
 }

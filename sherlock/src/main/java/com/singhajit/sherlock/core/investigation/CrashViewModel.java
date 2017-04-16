@@ -64,6 +64,10 @@ public class CrashViewModel {
     return crash.getDeviceInfo().getBrand();
   }
 
+  public AppInfo getAppInfo() {
+    return crash.getAppInfo();
+  }
+
   public int getIdentifier() {
     return crash.getId();
   }
