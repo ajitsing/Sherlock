@@ -10,4 +10,5 @@
   <string name="brand">Brand</string>
   <string name="about_app">About Application</string>
   <string name="version">Version</string>
+  <string name="not_found">404</string>
 </resources>

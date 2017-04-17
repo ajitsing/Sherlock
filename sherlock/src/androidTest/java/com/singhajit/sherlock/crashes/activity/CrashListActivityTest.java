@@ -33,9 +33,11 @@ import static android.support.test.espresso.intent.matcher.IntentMatchers.anyInt
 import static android.support.test.espresso.intent.matcher.IntentMatchers.hasComponent;
 import static android.support.test.espresso.intent.matcher.IntentMatchers.hasExtra;
 import static android.support.test.espresso.matcher.ViewMatchers.hasDescendant;
+import static android.support.test.espresso.matcher.ViewMatchers.isDisplayed;
 import static android.support.test.espresso.matcher.ViewMatchers.withText;
 import static org.hamcrest.Matchers.allOf;
 import static org.hamcrest.Matchers.containsString;
+import static org.hamcrest.core.IsNot.not;
 
 public class CrashListActivityTest {
   @Rule
@@ -69,6 +71,8 @@ public class CrashListActivityTest {
         hasDescendant(withText("Sherlock:10")),
         hasDescendant(withText(containsString(simpleDateFormat.format(new Date()))))
     )));
+
+    onView(withText(R.string.not_found)).check(matches(not(isDisplayed())));
   }
 
   @Test
@@ -87,6 +91,12 @@ public class CrashListActivityTest {
     intended(allOf(
         hasComponent(CrashActivity.class.getName()),
         hasExtra(CrashActivity.CRASH_ID, 1)));
+  }
+
+  @Test
+  public void shouldShowNoCrashFoundMessage() throws Exception {
+    rule.launchActivity(null);
+    onView(withText(R.string.not_found)).check(matches(isDisplayed()));
   }
 
   private Matcher<View> withRecyclerView(final int recyclerViewId, final int position) {

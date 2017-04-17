@@ -5,6 +5,7 @@ import com.singhajit.sherlock.core.investigation.CrashViewModel;
 import com.singhajit.sherlock.core.repo.CrashReports;
 import com.singhajit.sherlock.crashes.action.CrashListActions;
 import com.singhajit.sherlock.crashes.presenter.CrashListPresenter;
+import com.singhajit.sherlock.crashes.viewmodel.CrashesViewModel;
 
 import org.hamcrest.CustomTypeSafeMatcher;
 import org.junit.Test;
@@ -30,9 +31,10 @@ public class CrashListPresenterTest {
 
     presenter.render(crashReports);
 
-    verify(actions).render(argThat(new CustomTypeSafeMatcher<List<CrashViewModel>>("") {
+    verify(actions).render(argThat(new CustomTypeSafeMatcher<CrashesViewModel>("") {
       @Override
-      protected boolean matchesSafely(List<CrashViewModel> crashes) {
+      protected boolean matchesSafely(CrashesViewModel viewModel) {
+        List<CrashViewModel> crashes = viewModel.getCrashViewModels();
         return crashes.size() == 2 && crashes.get(0).getIdentifier() == 1;
       }
     }));

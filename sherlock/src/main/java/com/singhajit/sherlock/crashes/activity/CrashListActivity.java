@@ -7,15 +7,13 @@ import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
 
 import com.singhajit.sherlock.R;
-import com.singhajit.sherlock.core.investigation.CrashViewModel;
 import com.singhajit.sherlock.core.realm.SherlockRealm;
 import com.singhajit.sherlock.core.repo.CrashReports;
 import com.singhajit.sherlock.crashes.action.CrashListActions;
 import com.singhajit.sherlock.crashes.adapter.CrashAdapter;
 import com.singhajit.sherlock.crashes.presenter.CrashListPresenter;
+import com.singhajit.sherlock.crashes.viewmodel.CrashesViewModel;
 import com.singhajit.sherlock.databinding.CrashListBinding;
-
-import java.util.List;
 
 public class CrashListActivity extends BaseActivity implements CrashListActions {
 
@@ -36,8 +34,9 @@ public class CrashListActivity extends BaseActivity implements CrashListActions 
   }
 
   @Override
-  public void render(List<CrashViewModel> crashes) {
-    CrashAdapter crashAdapter = new CrashAdapter(crashes, presenter);
+  public void render(CrashesViewModel viewModel) {
+    CrashAdapter crashAdapter = new CrashAdapter(viewModel.getCrashViewModels(), presenter);
+    binding.setViewModel(viewModel);
     binding.crashList.setAdapter(crashAdapter);
     binding.crashList.setLayoutManager(new LinearLayoutManager(this));
   }
