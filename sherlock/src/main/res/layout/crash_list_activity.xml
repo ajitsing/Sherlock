@@ -31,6 +31,7 @@
     </android.support.design.widget.AppBarLayout>
 
     <LinearLayout
+      android:id="@+id/no_crash_found_layout"
       android:visibility="@{viewModel.crashNotFoundViewState.visibility}"
       android:layout_width="match_parent"
       android:layout_height="match_parent"

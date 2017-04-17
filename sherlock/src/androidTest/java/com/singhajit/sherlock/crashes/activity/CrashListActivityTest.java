@@ -34,6 +34,7 @@ import static android.support.test.espresso.intent.matcher.IntentMatchers.hasCom
 import static android.support.test.espresso.intent.matcher.IntentMatchers.hasExtra;
 import static android.support.test.espresso.matcher.ViewMatchers.hasDescendant;
 import static android.support.test.espresso.matcher.ViewMatchers.isDisplayed;
+import static android.support.test.espresso.matcher.ViewMatchers.withId;
 import static android.support.test.espresso.matcher.ViewMatchers.withText;
 import static org.hamcrest.Matchers.allOf;
 import static org.hamcrest.Matchers.containsString;
@@ -96,7 +97,7 @@ public class CrashListActivityTest {
   @Test
   public void shouldShowNoCrashFoundMessage() throws Exception {
     rule.launchActivity(null);
-    onView(withText(R.string.not_found)).check(matches(isDisplayed()));
+    onView(withId(R.id.no_crash_found_layout)).check(matches(isDisplayed()));
   }
 
   private Matcher<View> withRecyclerView(final int recyclerViewId, final int position) {
