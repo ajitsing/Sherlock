@@ -11,4 +11,5 @@
   <string name="about_app">About Application</string>
   <string name="version">Version</string>
   <string name="not_found">404</string>
+  <string name="github_link">https://github.com/ajitsing/Sherlock</string>
 </resources>

@@ -2,9 +2,12 @@ package com.singhajit.sherlock.crashes.activity;
 
 import android.content.Intent;
 import android.databinding.DataBindingUtil;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
+import android.view.Menu;
+import android.view.MenuItem;
 
 import com.singhajit.sherlock.R;
 import com.singhajit.sherlock.core.realm.SherlockRealm;
@@ -39,6 +42,22 @@ public class CrashListActivity extends BaseActivity implements CrashListActions 
     binding.setViewModel(viewModel);
     binding.crashList.setAdapter(crashAdapter);
     binding.crashList.setLayoutManager(new LinearLayoutManager(this));
+  }
+
+  @Override
+  public boolean onCreateOptionsMenu(Menu menu) {
+    getMenuInflater().inflate(R.menu.sherlock, menu);
+    return true;
+  }
+
+  @Override
+  public boolean onOptionsItemSelected(MenuItem item) {
+    if (item.getItemId() == R.id.github_link) {
+      Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(getString(R.string.github_link)));
+      startActivity(browserIntent);
+      return true;
+    }
+    return super.onOptionsItemSelected(item);
   }
 
   @Override
