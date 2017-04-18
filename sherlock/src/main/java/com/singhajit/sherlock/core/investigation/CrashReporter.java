@@ -5,7 +5,9 @@ import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
+import android.os.Build;
 import android.support.v4.app.TaskStackBuilder;
+import android.support.v4.content.ContextCompat;
 
 import com.singhajit.sherlock.R;
 import com.singhajit.sherlock.crashes.activity.CrashActivity;
@@ -29,15 +31,18 @@ public class CrashReporter {
 
     PendingIntent pendingIntent = stackBuilder.getPendingIntent(221, FLAG_UPDATE_CURRENT);
 
-    Notification notification = new Notification.Builder(context)
+    Notification.Builder notificationBuilder = new Notification.Builder(context)
         .setContentTitle(crashViewModel.getPlace())
         .setContentText(crashViewModel.getDate())
         .setSmallIcon(R.mipmap.ic_stat_sherlock_logo)
         .setContentIntent(pendingIntent)
-        .setAutoCancel(true)
-        .build();
+        .setAutoCancel(true);
+
+    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+      notificationBuilder.setColor(ContextCompat.getColor(context, R.color.colorAccent));
+    }
 
     NotificationManager notificationManager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
-    notificationManager.notify(crashViewModel.getIdentifier(), notification);
+    notificationManager.notify(crashViewModel.getIdentifier(), notificationBuilder.build());
   }
 }
