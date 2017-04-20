@@ -15,21 +15,30 @@ public class CrashAnalyzer {
 
   public Crash getAnalysis() {
     StringBuilder factsBuilder = new StringBuilder();
-    String placeOfCrash = "";
+    String placeOfCrash;
 
     factsBuilder.append(throwable.getLocalizedMessage());
     factsBuilder.append("\n");
     factsBuilder.append(stackTrace(throwable.getStackTrace()));
     factsBuilder.append("\n");
-    factsBuilder.append("Caused By: ");
     if (throwable.getCause() != null) {
+      factsBuilder.append("Caused By: ");
       StackTraceElement[] stackTrace = throwable.getCause().getStackTrace();
-      StackTraceElement stackTraceElement = stackTrace[0];
-      placeOfCrash = format("%s:%d", stackTraceElement.getClassName(), stackTraceElement.getLineNumber());
+      placeOfCrash = getCrashOriginatingClass(stackTrace);
       factsBuilder.append(stackTrace(stackTrace));
+    } else {
+      placeOfCrash = getCrashOriginatingClass(throwable.getStackTrace());
     }
 
     return new Crash(placeOfCrash, throwable.getLocalizedMessage(), factsBuilder.toString());
+  }
+
+  private String getCrashOriginatingClass(StackTraceElement[] stackTraceElements) {
+    if (stackTraceElements.length > 0) {
+      StackTraceElement stackTraceElement = stackTraceElements[0];
+      return format("%s:%d", stackTraceElement.getClassName(), stackTraceElement.getLineNumber());
+    }
+    return "";
   }
 
   private static String stackTrace(StackTraceElement[] stackTrace) {

@@ -35,4 +35,26 @@ public class CrashAnalyzerTest {
     );
     assertThat(crash.getPlace(), containsString("Class2:2"));
   }
+
+  @Test
+  public void shouldBuildStackTraceWhenCauseIsNotPresentInsideThrowable() throws Exception {
+    Throwable throwable = mock(Throwable.class);
+    when(throwable.getLocalizedMessage()).thenReturn("Full Message");
+
+    StackTraceElement stackTraceElement1 = new StackTraceElement("Class1", "method1", "file1", 1);
+    StackTraceElement stackTraceElement2 = new StackTraceElement("Class2", "method2", "file2", 2);
+    StackTraceElement[] stackTraceElements = {stackTraceElement1, stackTraceElement2};
+
+    when(throwable.getCause()).thenReturn(null);
+    when(throwable.getStackTrace()).thenReturn(stackTraceElements);
+
+    CrashAnalyzer investigator = new CrashAnalyzer(throwable);
+
+    Crash crash = investigator.getAnalysis();
+    assertThat(crash.getStackTrace(), containsString("Full Message\n" +
+        "at Class1.method1(file1:1)\n" +
+        "at Class2.method2(file2:2)\n\n")
+    );
+    assertThat(crash.getPlace(), containsString("Class1:1"));
+  }
 }
