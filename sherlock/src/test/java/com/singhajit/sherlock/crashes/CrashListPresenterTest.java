@@ -1,5 +1,6 @@
 package com.singhajit.sherlock.crashes;
 
+import com.singhajit.sherlock.core.investigation.AppInfo;
 import com.singhajit.sherlock.core.investigation.Crash;
 import com.singhajit.sherlock.core.investigation.CrashViewModel;
 import com.singhajit.sherlock.core.repo.CrashReports;
@@ -26,7 +27,10 @@ public class CrashListPresenterTest {
     CrashReports crashReports = mock(CrashReports.class);
     Crash crash1 = mock(Crash.class);
     when(crash1.getId()).thenReturn(1);
-    List<Crash> crashes = asList(crash1, mock(Crash.class));
+    when(crash1.getAppInfo()).thenReturn(mock(AppInfo.class));
+    Crash crash2 = mock(Crash.class);
+    when(crash2.getAppInfo()).thenReturn(mock(AppInfo.class));
+    List<Crash> crashes = asList(crash1, crash2);
     when(crashReports.getAll()).thenReturn(crashes);
 
     presenter.render(crashReports);

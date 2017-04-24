@@ -1,15 +1,18 @@
 package com.singhajit.sherlock.core.investigation;
 
+import com.singhajit.sherlock.crashes.viewmodel.AppInfoViewModel;
+
 import java.text.SimpleDateFormat;
 
 public class CrashViewModel {
   private Crash crash;
+  private AppInfoViewModel appInfoViewModel;
 
   public CrashViewModel() {
   }
 
   public CrashViewModel(Crash crash) {
-    this.crash = crash;
+    populate(crash);
   }
 
   public String getPlace() {
@@ -43,11 +46,8 @@ public class CrashViewModel {
     crashInfo.append(getDeviceAndroidApiVersion() + "\n\n");
 
     crashInfo.append("App Info:\n");
-    crashInfo.append("Version: ");
-    crashInfo.append(getAppInfo().getVersion() + "\n");
-
-    crashInfo.append("Details: ");
-    crashInfo.append(getAppInfo().getDetails() + "\n\n");
+    crashInfo.append(getAppInfoViewModel().getDetails());
+    crashInfo.append("\n");
 
     crashInfo.append("StackTrace:\n");
     crashInfo.append(getStackTrace() + "\n");
@@ -71,8 +71,8 @@ public class CrashViewModel {
     return crash.getDeviceInfo().getBrand();
   }
 
-  public AppInfo getAppInfo() {
-    return crash.getAppInfo();
+  public AppInfoViewModel getAppInfoViewModel() {
+    return appInfoViewModel;
   }
 
   public int getIdentifier() {
@@ -86,5 +86,6 @@ public class CrashViewModel {
 
   public void populate(Crash crash) {
     this.crash = crash;
+    this.appInfoViewModel = new AppInfoViewModel(crash.getAppInfo());
   }
 }

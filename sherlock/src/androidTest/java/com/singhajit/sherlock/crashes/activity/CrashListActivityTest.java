@@ -5,8 +5,6 @@ import android.app.Instrumentation;
 import android.content.Intent;
 import android.support.test.InstrumentationRegistry;
 import android.support.test.espresso.intent.rule.IntentsTestRule;
-import android.support.v7.widget.RecyclerView;
-import android.view.View;
 
 import com.singhajit.sherlock.R;
 import com.singhajit.sherlock.RealmResetRule;
@@ -14,8 +12,6 @@ import com.singhajit.sherlock.core.investigation.Crash;
 import com.singhajit.sherlock.core.realm.SherlockRealm;
 import com.singhajit.sherlock.core.repo.CrashReports;
 
-import org.hamcrest.CustomTypeSafeMatcher;
-import org.hamcrest.Matcher;
 import org.junit.Rule;
 import org.junit.Test;
 
@@ -36,6 +32,7 @@ import static android.support.test.espresso.matcher.ViewMatchers.hasDescendant;
 import static android.support.test.espresso.matcher.ViewMatchers.isDisplayed;
 import static android.support.test.espresso.matcher.ViewMatchers.withId;
 import static android.support.test.espresso.matcher.ViewMatchers.withText;
+import static com.singhajit.sherlock.CustomEspressoMatchers.withRecyclerView;
 import static org.hamcrest.Matchers.allOf;
 import static org.hamcrest.Matchers.containsString;
 import static org.hamcrest.core.IsNot.not;
@@ -98,15 +95,5 @@ public class CrashListActivityTest {
   public void shouldShowNoCrashFoundMessage() throws Exception {
     rule.launchActivity(null);
     onView(withId(R.id.no_crash_found_layout)).check(matches(isDisplayed()));
-  }
-
-  private Matcher<View> withRecyclerView(final int recyclerViewId, final int position) {
-    return new CustomTypeSafeMatcher<View>("") {
-      @Override
-      protected boolean matchesSafely(View item) {
-        RecyclerView view = (RecyclerView) item.getRootView().findViewById(recyclerViewId);
-        return view.getChildAt(position) == item;
-      }
-    };
   }
 }

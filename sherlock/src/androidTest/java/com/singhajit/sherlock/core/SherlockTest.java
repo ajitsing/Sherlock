@@ -51,17 +51,16 @@ public class SherlockTest {
     Context targetContext = InstrumentationRegistry.getTargetContext();
     Sherlock.init(targetContext);
 
-    final String version = "2.21";
-    final String details = "BuildNumber: 221B";
     Sherlock.setAppInfoProvider(new AppInfoProvider() {
       @Override
       public AppInfo getAppInfo() {
-        return new AppInfo(version, details);
+        return new AppInfo.Builder().with("Version", "2.21").with("BuildNumber", "221B").build();
       }
     });
 
     AppInfo appInfo = Sherlock.getInstance().getAppInfoProvider().getAppInfo();
-    assertThat(appInfo.getVersion(), is(version));
-    assertThat(appInfo.getDetails(), is(details));
+    assertThat(appInfo.getAppDetails().size(), is(2));
+    assertThat(appInfo.getAppDetails().get("Version"), is("2.21"));
+    assertThat(appInfo.getAppDetails().get("BuildNumber"), is("221B"));
   }
 }

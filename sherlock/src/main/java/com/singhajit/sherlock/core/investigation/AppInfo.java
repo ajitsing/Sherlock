@@ -1,43 +1,39 @@
 package com.singhajit.sherlock.core.investigation;
 
+import java.util.Map;
+import java.util.TreeMap;
+
+import io.realm.RealmList;
 import io.realm.RealmObject;
 
 public class AppInfo extends RealmObject {
-  private String version;
-  private String details;
+  private RealmList<Pair> appDetails = new RealmList<>();
 
   public AppInfo() {
   }
 
-  public AppInfo(String version, String details) {
-    this.version = version;
-    this.details = details;
+  private AppInfo(RealmList<Pair> appDetails) {
+    this.appDetails = appDetails;
   }
 
-  public String getVersion() {
-    return version;
-  }
-
-  public String getDetails() {
-    return details;
+  public Map<String, String> getAppDetails() {
+    TreeMap<String, String> details = new TreeMap<>();
+    for (Pair pair : appDetails) {
+      details.put(pair.getKey(), pair.getVal());
+    }
+    return details.descendingMap();
   }
 
   public static class Builder {
-    private String version;
-    private String details;
+    RealmList<Pair> appDetails = new RealmList<>();
 
-    public Builder withVersionName(String version) {
-      this.version = version;
-      return this;
-    }
-
-    public Builder withOtherDetails(String details) {
-      this.details = details;
+    public Builder with(String key, String value) {
+      appDetails.add(new Pair(key, value));
       return this;
     }
 
     public AppInfo build() {
-      return new AppInfo(version, details);
+      return new AppInfo(appDetails);
     }
   }
 }

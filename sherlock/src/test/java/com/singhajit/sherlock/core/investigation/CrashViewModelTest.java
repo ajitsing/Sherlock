@@ -15,6 +15,7 @@ public class CrashViewModelTest {
   public void shouldReturnPlaceOfCrash() throws Exception {
     Crash crash = mock(Crash.class);
     when(crash.getPlace()).thenReturn("com.singhajit.sherlock.core.Crash:20");
+    when(crash.getAppInfo()).thenReturn(mock(AppInfo.class));
     CrashViewModel viewModel = new CrashViewModel(crash);
 
     assertThat(viewModel.getPlace(), is("Crash:20"));
@@ -26,6 +27,7 @@ public class CrashViewModelTest {
     Calendar calendar = Calendar.getInstance();
     calendar.set(2017, 4, 15, 10, 50, 55);
     when(crash.getDate()).thenReturn(calendar.getTime());
+    when(crash.getAppInfo()).thenReturn(mock(AppInfo.class));
 
     CrashViewModel viewModel = new CrashViewModel(crash);
 
@@ -36,6 +38,7 @@ public class CrashViewModelTest {
   public void shouldReturnIdentifier() throws Exception {
     Crash crash = mock(Crash.class);
     when(crash.getId()).thenReturn(1);
+    when(crash.getAppInfo()).thenReturn(mock(AppInfo.class));
 
     CrashViewModel viewModel = new CrashViewModel(crash);
 
@@ -52,9 +55,7 @@ public class CrashViewModelTest {
     when(deviceInfo.getSdk()).thenReturn("21");
     when(crash.getDeviceInfo()).thenReturn(deviceInfo);
 
-    AppInfo appInfo = mock(AppInfo.class);
-    when(appInfo.getVersion()).thenReturn("2.21");
-    when(appInfo.getDetails()).thenReturn("Build Number: 221");
+    AppInfo appInfo = new AppInfo.Builder().with("Version", "2.21").with("Build Number", "221").build();
     when(crash.getAppInfo()).thenReturn(appInfo);
 
     CrashViewModel viewModel = new CrashViewModel(crash);
@@ -65,7 +66,7 @@ public class CrashViewModelTest {
         "Android API: 21\n\n" +
         "App Info:\n" +
         "Version: 2.21\n" +
-        "Details: Build Number: 221\n\n" +
+        "Build Number: 221\n\n" +
         "StackTrace:\nStackTrace\n")
     );
   }

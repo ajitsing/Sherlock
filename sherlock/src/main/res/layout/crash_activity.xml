@@ -192,11 +192,20 @@
               android:layout_height="wrap_content"
               app:cardElevation="3dp">
 
-              <include
-                layout="@layout/app_info"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                app:appInfo="@{viewModel.appInfo}"/>
+              <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:orientation="vertical">
+
+                <android.support.v7.widget.RecyclerView
+                  android:id="@+id/app_info_details"
+                  android:layout_width="match_parent"
+                  android:layout_height="match_parent"
+                  android:layout_marginEnd="5dp"
+                  android:layout_marginStart="5dp"
+                  android:layout_marginTop="10dp"
+                  android:scrollbars="vertical"/>
+              </LinearLayout>
             </android.support.v7.widget.CardView>
           </LinearLayout>
         </android.support.v7.widget.CardView>
