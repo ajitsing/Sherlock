@@ -6,9 +6,9 @@
   <style name="Sherlock.Base" parent="Theme.AppCompat.Light.DarkActionBar">
     <item name="windowNoTitle">true</item>
     <item name="windowActionBar">false</item>
-    <item name="colorPrimary">@color/colorPrimary</item>
-    <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
-    <item name="colorAccent">@color/colorAccent</item>
+    <item name="colorPrimary">@color/sherlock_colorPrimary</item>
+    <item name="colorPrimaryDark">@color/sherlock_colorPrimaryDark</item>
+    <item name="colorAccent">@color/sherlock_colorAccent</item>
   </style>
 
   <style name="CardViewStyle" parent="Theme.AppCompat.Light">
@@ -18,6 +18,6 @@
     <item name="contentPaddingTop">12dp</item>
     <item name="contentPaddingLeft">8dp</item>
     <item name="contentPaddingRight">8dp</item>
-    <item name="cardBackgroundColor">@color/white</item>
+    <item name="cardBackgroundColor">@color/sherlock_white</item>
   </style>
 </resources>

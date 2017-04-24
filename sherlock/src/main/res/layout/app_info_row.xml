@@ -20,7 +20,7 @@
       android:layout_height="wrap_content"
       android:layout_gravity="start"
       android:text="@{appInfo.attr}"
-      android:textColor="@color/colorAccent"/>
+      android:textColor="@color/sherlock_colorAccent"/>
 
     <TextView
       android:layout_width="match_parent"

@@ -39,7 +39,7 @@ public class CrashReporter {
         .setAutoCancel(true);
 
     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-      notificationBuilder.setColor(ContextCompat.getColor(context, R.color.colorAccent));
+      notificationBuilder.setColor(ContextCompat.getColor(context, R.color.sherlock_colorAccent));
     }
 
     NotificationManager notificationManager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);

@@ -43,7 +43,7 @@
           android:layout_height="wrap_content"
           android:layout_marginBottom="10dp"
           android:text="@{viewModel.place}"
-          android:textColor="@color/colorAccent"/>
+          android:textColor="@color/sherlock_colorAccent"/>
 
         <TextView
           android:layout_width="wrap_content"

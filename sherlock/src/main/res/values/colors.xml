@@ -1,10 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-  <color name="colorPrimary">#D32F2F</color>
-  <color name="colorPrimaryDark">#B71C1C</color>
-  <color name="colorAccent">#5B3758</color>
+  <color name="sherlock_colorPrimary">#D32F2F</color>
+  <color name="sherlock_colorPrimaryDark">#B71C1C</color>
+  <color name="sherlock_colorAccent">#5B3758</color>
 
-  <color name="white">#FFFFFF</color>
-  <color name="light_black">#2e2828</color>
-  <color name="grey">#ededed</color>
+  <color name="sherlock_white">#FFFFFF</color>
 </resources>

@@ -25,7 +25,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="start"
         android:text="@string/name"
-        android:textColor="@color/colorAccent"/>
+        android:textColor="@color/sherlock_colorAccent"/>
 
       <TextView
         android:layout_width="match_parent"
@@ -48,7 +48,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="start"
         android:text="@string/brand"
-        android:textColor="@color/colorAccent"/>
+        android:textColor="@color/sherlock_colorAccent"/>
 
       <TextView
         android:layout_width="match_parent"
@@ -70,7 +70,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="start"
         android:text="@string/android_api_version"
-        android:textColor="@color/colorAccent"/>
+        android:textColor="@color/sherlock_colorAccent"/>
 
       <TextView
         android:layout_width="match_parent"
