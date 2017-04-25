@@ -1,4 +1,7 @@
 # Sherlock
+[![Build Status](https://travis-ci.org/ajitsing/Sherlock.svg?branch=master)](https://travis-ci.org/ajitsing/Sherlock)
+[![LICENSE](https://img.shields.io/badge/license-Apache-blue.svg)](https://github.com/ajitsing/Sherlock/blob/master/LICENSE.txt)
+
 Sherlock reports any crash that occurres in your application as a notification. You just need to initialize Sherlock at the start of your application and it will take care of the rest.
 
 ## Motivation
