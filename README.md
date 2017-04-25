@@ -16,7 +16,10 @@ android {
       enabled = true
     }
 }
-compile 'com.github.ajitsing:sherlock:1.0.0@aar'
+
+compile('com.github.ajitsing:sherlock:1.0.0@aar') {
+    transitive = true
+}
 ```
 
 Sherlock usages data binding, so make sure that you have enabled data binding for your app.
