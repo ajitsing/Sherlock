@@ -9,6 +9,9 @@ The motivation behind creating Sherlock is to make the life of Developer and tes
 the app and he/she encounters a crash, most of the time they don't have enough details in their hand to enable developer to
 start fixing the crash immediately. Now with the help of Sherlock, any tester will have enough info to report the crash.
 
+
+![Alt text](https://github.com/ajitsing/ScreenShots/blob/master/sherlock/sherlock_demo.gif)
+
 ## Installation
 ```groovy
 android {
