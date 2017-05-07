@@ -1,69 +1,60 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout
-  xmlns:android="http://schemas.android.com/apk/res/android">
 
-  <data class="CrashListBinding">
+<LinearLayout
+  xmlns:android="http://schemas.android.com/apk/res/android"
+  android:layout_width="match_parent"
+  android:layout_height="match_parent"
+  android:orientation="vertical">
 
-    <variable
-      name="viewModel"
-      type="com.singhajit.sherlock.crashes.viewmodel.CrashesViewModel"/>
-  </data>
+  <android.support.design.widget.AppBarLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
+
+    <android.support.v7.widget.Toolbar
+      android:id="@+id/toolbar"
+      android:layout_width="match_parent"
+      android:layout_height="?attr/actionBarSize"
+      app:layout_scrollFlags="scroll|enterAlways"
+      app:popupTheme="@style/ThemeOverlay.AppCompat.Light">
+    </android.support.v7.widget.Toolbar>
+  </android.support.design.widget.AppBarLayout>
 
   <LinearLayout
+    android:id="@+id/no_crash_found_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:background="@color/sherlock_white"
+    android:orientation="vertical"
+    android:paddingTop="50dp"
+    android:visibility="gone">
 
-    <android.support.design.widget.AppBarLayout
-      xmlns:android="http://schemas.android.com/apk/res/android"
-      xmlns:app="http://schemas.android.com/apk/res-auto"
+    <ImageView
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_gravity="center_horizontal"
+      android:layout_marginBottom="20dp"
+      android:layout_marginTop="10dp"
+      android:background="@mipmap/sherlock_holmes_big"/>
+
+    <TextView
       android:layout_width="match_parent"
       android:layout_height="wrap_content"
-      android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
-
-      <android.support.v7.widget.Toolbar
-        android:id="@+id/toolbar"
-        android:layout_width="match_parent"
-        android:layout_height="?attr/actionBarSize"
-        app:layout_scrollFlags="scroll|enterAlways"
-        app:popupTheme="@style/ThemeOverlay.AppCompat.Light">
-      </android.support.v7.widget.Toolbar>
-    </android.support.design.widget.AppBarLayout>
-
-    <LinearLayout
-      android:id="@+id/no_crash_found_layout"
-      android:visibility="@{viewModel.crashNotFoundViewState.visibility}"
-      android:layout_width="match_parent"
-      android:layout_height="match_parent"
-      android:background="@color/sherlock_white"
-      android:orientation="vertical"
-      android:paddingTop="50dp">
-
-      <ImageView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginBottom="20dp"
-        android:layout_marginTop="10dp"
-        android:background="@mipmap/sherlock_holmes_big"/>
-
-      <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center_horizontal"
-        android:text="@string/not_found"
-        android:textColor="@color/cardview_dark_background"
-        android:textSize="20dp"
-        android:textStyle="bold"/>
-    </LinearLayout>
-
-    <android.support.v7.widget.RecyclerView
-      android:id="@+id/crash_list"
-      android:layout_width="match_parent"
-      android:layout_height="match_parent"
-      android:layout_marginEnd="5dp"
-      android:layout_marginStart="5dp"
-      android:layout_marginTop="10dp"
-      android:scrollbars="vertical"/>
+      android:gravity="center_horizontal"
+      android:text="@string/not_found"
+      android:textColor="@color/cardview_dark_background"
+      android:textSize="20dp"
+      android:textStyle="bold"/>
   </LinearLayout>
-</layout>
+
+  <android.support.v7.widget.RecyclerView
+    android:id="@+id/crash_list"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_marginEnd="5dp"
+    android:layout_marginStart="5dp"
+    android:layout_marginTop="10dp"
+    android:scrollbars="vertical"/>
+</LinearLayout>

@@ -4,7 +4,6 @@ import com.singhajit.sherlock.core.investigation.Crash;
 import com.singhajit.sherlock.core.investigation.CrashViewModel;
 import com.singhajit.sherlock.core.repo.CrashReports;
 import com.singhajit.sherlock.crashes.action.CrashActions;
-import com.singhajit.sherlock.crashes.viewmodel.AppInfoViewModel;
 
 public class CrashPresenter {
   private final CrashReports crashReports;
@@ -15,9 +14,11 @@ public class CrashPresenter {
     this.actions = actions;
   }
 
-  public void render(int crashId, CrashViewModel crashViewModel) {
+  public void render(int crashId) {
     Crash crash = crashReports.get(crashId);
-    crashViewModel.populate(crash);
+    CrashViewModel crashViewModel = new CrashViewModel(crash);
+
+    actions.render(crashViewModel);
     actions.renderAppInfo(crashViewModel.getAppInfoViewModel());
   }
 

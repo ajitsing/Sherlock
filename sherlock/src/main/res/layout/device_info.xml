@@ -1,85 +1,76 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:tools="http://schemas.android.com/tools">
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:tools="http://schemas.android.com/tools"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:orientation="vertical">
 
-  <data>
+  <LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="10dp"
+    android:layout_marginTop="10dp"
+    android:orientation="horizontal">
 
-    <variable
-      name="viewModel"
-      type="com.singhajit.sherlock.core.investigation.CrashViewModel"/>
-  </data>
+    <TextView
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_gravity="start"
+      android:text="@string/name"
+      android:textColor="@color/sherlock_colorAccent"/>
 
-  <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="vertical">
-
-    <LinearLayout
+    <TextView
+      android:id="@+id/device_name"
       android:layout_width="match_parent"
       android:layout_height="wrap_content"
-      android:layout_marginBottom="10dp"
-      android:layout_marginTop="10dp"
-      android:orientation="horizontal">
-
-      <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="start"
-        android:text="@string/name"
-        android:textColor="@color/sherlock_colorAccent"/>
-
-      <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="end"
-        android:scrollHorizontally="true"
-        android:text="@{viewModel.deviceName}"
-        android:textColor="@color/cardview_dark_background"
-        tools:text="21"/>
-    </LinearLayout>
-
-    <LinearLayout
-      android:layout_width="match_parent"
-      android:layout_height="wrap_content"
-      android:layout_marginBottom="10dp"
-      android:orientation="horizontal">
-
-      <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="start"
-        android:text="@string/brand"
-        android:textColor="@color/sherlock_colorAccent"/>
-
-      <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="end"
-        android:scrollHorizontally="true"
-        android:text="@{viewModel.deviceBrand}"
-        android:textColor="@color/cardview_dark_background"
-        tools:text="21"/>
-    </LinearLayout>
-
-    <LinearLayout
-      android:layout_width="match_parent"
-      android:layout_height="wrap_content"
-      android:orientation="horizontal">
-
-      <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="start"
-        android:text="@string/android_api_version"
-        android:textColor="@color/sherlock_colorAccent"/>
-
-      <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="end"
-        android:scrollHorizontally="true"
-        android:text="@{viewModel.deviceAndroidApiVersion}"
-        android:textColor="@color/cardview_dark_background"
-        tools:text="21"/>
-    </LinearLayout>
+      android:gravity="end"
+      android:scrollHorizontally="true"
+      android:textColor="@color/cardview_dark_background"
+      tools:text="21"/>
   </LinearLayout>
-</layout>
+
+  <LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="10dp"
+    android:orientation="horizontal">
+
+    <TextView
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_gravity="start"
+      android:text="@string/brand"
+      android:textColor="@color/sherlock_colorAccent"/>
+
+    <TextView
+      android:id="@+id/device_brand"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:gravity="end"
+      android:scrollHorizontally="true"
+      android:textColor="@color/cardview_dark_background"
+      tools:text="21"/>
+  </LinearLayout>
+
+  <LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal">
+
+    <TextView
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_gravity="start"
+      android:text="@string/android_api_version"
+      android:textColor="@color/sherlock_colorAccent"/>
+
+    <TextView
+      android:id="@+id/device_android_version"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:gravity="end"
+      android:scrollHorizontally="true"
+      android:textColor="@color/cardview_dark_background"
+      tools:text="21"/>
+  </LinearLayout>
+</LinearLayout>

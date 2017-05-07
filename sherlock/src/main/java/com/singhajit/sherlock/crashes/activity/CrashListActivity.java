@@ -1,13 +1,15 @@
 package com.singhajit.sherlock.crashes.activity;
 
 import android.content.Intent;
-import android.databinding.DataBindingUtil;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.LinearLayout;
 
 import com.singhajit.sherlock.R;
 import com.singhajit.sherlock.core.realm.SherlockRealm;
@@ -16,19 +18,17 @@ import com.singhajit.sherlock.crashes.action.CrashListActions;
 import com.singhajit.sherlock.crashes.adapter.CrashAdapter;
 import com.singhajit.sherlock.crashes.presenter.CrashListPresenter;
 import com.singhajit.sherlock.crashes.viewmodel.CrashesViewModel;
-import com.singhajit.sherlock.databinding.CrashListBinding;
 
 public class CrashListActivity extends BaseActivity implements CrashListActions {
 
   private CrashListPresenter presenter;
-  private CrashListBinding binding;
 
   @Override
   protected void onCreate(@Nullable Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
-    binding = DataBindingUtil.setContentView(this, R.layout.crash_list_activity);
+    setContentView(R.layout.crash_list_activity);
 
-    enableHomeButton(binding.toolbar);
+    enableHomeButton((Toolbar) findViewById(R.id.toolbar));
     setTitle(R.string.app_name);
 
     CrashReports crashReports = new CrashReports(SherlockRealm.create(this));
@@ -38,10 +38,14 @@ public class CrashListActivity extends BaseActivity implements CrashListActions 
 
   @Override
   public void render(CrashesViewModel viewModel) {
+    RecyclerView crashList = (RecyclerView) findViewById(R.id.crash_list);
     CrashAdapter crashAdapter = new CrashAdapter(viewModel.getCrashViewModels(), presenter);
-    binding.setViewModel(viewModel);
-    binding.crashList.setAdapter(crashAdapter);
-    binding.crashList.setLayoutManager(new LinearLayoutManager(this));
+    crashList.setAdapter(crashAdapter);
+    crashList.setLayoutManager(new LinearLayoutManager(this));
+
+    LinearLayout noCrashFoundLayout = (LinearLayout) findViewById(R.id.no_crash_found_layout);
+    //noinspection WrongConstant
+    noCrashFoundLayout.setVisibility(viewModel.getCrashNotFoundViewState().getVisibility());
   }
 
   @Override

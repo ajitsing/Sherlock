@@ -1,33 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:tools="http://schemas.android.com/tools">
+<LinearLayout
+  xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:tools="http://schemas.android.com/tools"
+  android:layout_width="match_parent"
+  android:layout_height="wrap_content"
+  android:layout_marginBottom="10dp"
+  android:orientation="horizontal">
 
-  <data class="AppInfoRowBinding">
+  <TextView
+    android:id="@+id/app_info_attr"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_gravity="start"
+    android:textColor="@color/sherlock_colorAccent"/>
 
-    <variable
-      name="appInfo"
-      type="com.singhajit.sherlock.crashes.viewmodel.AppInfoRowViewModel"/>
-  </data>
-
-  <LinearLayout
+  <TextView
+    android:id="@+id/app_info_val"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginBottom="10dp"
-    android:orientation="horizontal">
-
-    <TextView
-      android:layout_width="wrap_content"
-      android:layout_height="wrap_content"
-      android:layout_gravity="start"
-      android:text="@{appInfo.attr}"
-      android:textColor="@color/sherlock_colorAccent"/>
-
-    <TextView
-      android:layout_width="match_parent"
-      android:layout_height="wrap_content"
-      android:gravity="end"
-      android:text="@{appInfo.val}"
-      android:textColor="@color/cardview_dark_background"
-      tools:text="21"/>
-  </LinearLayout>
-</layout>
+    android:gravity="end"
+    android:textColor="@color/cardview_dark_background"
+    tools:text="21"/>
+</LinearLayout>

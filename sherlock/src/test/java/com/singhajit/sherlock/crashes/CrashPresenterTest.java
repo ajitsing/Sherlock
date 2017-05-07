@@ -1,5 +1,6 @@
 package com.singhajit.sherlock.crashes;
 
+import com.singhajit.sherlock.core.investigation.AppInfo;
 import com.singhajit.sherlock.core.investigation.Crash;
 import com.singhajit.sherlock.core.investigation.CrashViewModel;
 import com.singhajit.sherlock.core.repo.CrashReports;
@@ -7,8 +8,11 @@ import com.singhajit.sherlock.crashes.action.CrashActions;
 import com.singhajit.sherlock.crashes.presenter.CrashPresenter;
 import com.singhajit.sherlock.crashes.viewmodel.AppInfoViewModel;
 
+import org.hamcrest.CustomTypeSafeMatcher;
 import org.junit.Test;
 
+import static org.mockito.Matchers.any;
+import static org.mockito.Matchers.argThat;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -18,17 +22,22 @@ public class CrashPresenterTest {
   public void shouldInitializeCrashView() throws Exception {
     CrashReports crashReports = mock(CrashReports.class);
     Crash crash = mock(Crash.class);
+    when(crash.getId()).thenReturn(1);
+    AppInfo appInfo = mock(AppInfo.class);
+    when(crash.getAppInfo()).thenReturn(appInfo);
     when(crashReports.get(1)).thenReturn(crash);
     CrashActions actions = mock(CrashActions.class);
     CrashPresenter presenter = new CrashPresenter(crashReports, actions);
 
-    CrashViewModel viewModel = mock(CrashViewModel.class);
-    AppInfoViewModel appInfoViewModel = mock(AppInfoViewModel.class);
-    when(viewModel.getAppInfoViewModel()).thenReturn(appInfoViewModel);
-    presenter.render(1, viewModel);
+    presenter.render(1);
 
-    verify(viewModel).populate(crash);
-    verify(actions).renderAppInfo(appInfoViewModel);
+    verify(actions).render(argThat(new CustomTypeSafeMatcher<CrashViewModel>("") {
+      @Override
+      protected boolean matchesSafely(CrashViewModel crashViewModel) {
+        return crashViewModel.getIdentifier() == 1;
+      }
+    }));
+    verify(actions).renderAppInfo(any(AppInfoViewModel.class));
   }
 
   @Test

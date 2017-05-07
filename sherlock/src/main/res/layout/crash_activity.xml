@@ -1,215 +1,202 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout
+<LinearLayout
   xmlns:android="http://schemas.android.com/apk/res/android"
   xmlns:app="http://schemas.android.com/apk/res-auto"
-  xmlns:tools="http://schemas.android.com/tools">
+  xmlns:tools="http://schemas.android.com/tools"
+  android:layout_width="match_parent"
+  android:layout_height="wrap_content"
+  android:orientation="vertical">
 
-  <data class="CrashBinding">
-
-    <variable
-      name="viewModel"
-      type="com.singhajit.sherlock.core.investigation.CrashViewModel"/>
-  </data>
-
-  <LinearLayout
+  <android.support.design.widget.AppBarLayout
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
+
+    <android.support.v7.widget.Toolbar
+      android:id="@+id/toolbar"
+      android:layout_width="match_parent"
+      android:layout_height="?attr/actionBarSize"
+      app:layout_scrollFlags="scroll|enterAlways"
+      app:popupTheme="@style/ThemeOverlay.AppCompat.Light">
+    </android.support.v7.widget.Toolbar>
+  </android.support.design.widget.AppBarLayout>
+
+  <ScrollView
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <android.support.design.widget.AppBarLayout
-      xmlns:android="http://schemas.android.com/apk/res/android"
-      xmlns:app="http://schemas.android.com/apk/res-auto"
-      android:layout_width="match_parent"
-      android:layout_height="wrap_content"
-      android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
-
-      <android.support.v7.widget.Toolbar
-        android:id="@+id/toolbar"
-        android:layout_width="match_parent"
-        android:layout_height="?attr/actionBarSize"
-        app:layout_scrollFlags="scroll|enterAlways"
-        app:popupTheme="@style/ThemeOverlay.AppCompat.Light">
-      </android.support.v7.widget.Toolbar>
-    </android.support.design.widget.AppBarLayout>
-
-    <ScrollView
+    <LinearLayout
+      android:id="@+id/activity_main"
       android:layout_width="match_parent"
       android:layout_height="match_parent"
-      android:orientation="vertical">
+      android:orientation="vertical"
+      android:paddingBottom="@dimen/activity_vertical_margin"
+      android:paddingLeft="5dp"
+      android:paddingRight="5dp"
+      android:paddingTop="8dp"
+      tools:context="com.singhajit.sherlock.crashes.activity.CrashActivity">
 
-      <LinearLayout
-        android:id="@+id/activity_main"
+      <android.support.v7.widget.CardView
+        style="@style/CardViewStyle"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:paddingBottom="@dimen/activity_vertical_margin"
-        android:paddingLeft="5dp"
-        android:paddingRight="5dp"
-        android:paddingTop="8dp"
-        tools:context="com.singhajit.sherlock.crashes.activity.CrashActivity">
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="5dp"
+        android:elevation="2dp"
+        app:cardElevation="2dp">
 
-        <android.support.v7.widget.CardView
-          style="@style/CardViewStyle"
+        <LinearLayout
           android:layout_width="match_parent"
           android:layout_height="wrap_content"
-          android:layout_marginBottom="5dp"
-          android:elevation="2dp"
-          app:cardElevation="2dp">
+          android:orientation="vertical">
 
-          <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
-
-            <TextView
-              android:layout_width="match_parent"
-              android:layout_height="wrap_content"
-              android:layout_margin="10dp"
-              android:text="@{viewModel.exactLocationOfCrash}"
-              android:textColor="@color/sherlock_colorAccent"
-              android:textSize="15sp"
-              android:textStyle="bold"
-              tools:text="Place of crash"/>
-
-            <TextView
-              android:layout_width="wrap_content"
-              android:layout_height="wrap_content"
-              android:layout_margin="10dp"
-              android:layout_marginTop="10dp"
-              android:text="@{viewModel.reasonOfCrash}"
-              android:textColor="@color/cardview_dark_background"
-              android:textSize="15sp"
-              tools:text="Reason of crash"/>
-          </LinearLayout>
-        </android.support.v7.widget.CardView>
-
-        <android.support.v7.widget.CardView
-          style="@style/CardViewStyle"
-          android:layout_width="match_parent"
-          android:layout_height="wrap_content"
-          android:layout_marginBottom="5dp"
-          android:elevation="2dp"
-          app:cardElevation="2dp">
-
-          <LinearLayout
+          <TextView
+            android:id="@+id/crash_location"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
-            android:orientation="vertical">
+            android:textColor="@color/sherlock_colorAccent"
+            android:textSize="15sp"
+            android:textStyle="bold"
+            tools:text="Place of crash"/>
 
-            <TextView
-              android:layout_width="wrap_content"
-              android:layout_height="wrap_content"
-              android:layout_marginBottom="10dp"
-              android:text="@string/stack_trace"
-              android:textColor="@color/sherlock_colorAccent"
-              android:textSize="15sp"
-              android:textStyle="bold"/>
-
-            <android.support.v7.widget.CardView
-              android:layout_width="match_parent"
-              android:layout_height="wrap_content"
-              app:cardElevation="3dp">
-
-              <HorizontalScrollView
-                android:layout_width="fill_parent"
-                android:layout_height="fill_parent"
-                android:layout_marginTop="10dp">
-
-                <TextView
-                  android:layout_width="40dp"
-                  android:layout_height="wrap_content"
-                  android:scrollHorizontally="true"
-                  android:text="@{viewModel.stackTrace}"
-                  android:textColor="@color/cardview_dark_background"/>
-              </HorizontalScrollView>
-            </android.support.v7.widget.CardView>
-          </LinearLayout>
-        </android.support.v7.widget.CardView>
-
-        <android.support.v7.widget.CardView
-          style="@style/CardViewStyle"
-          android:layout_width="match_parent"
-          android:layout_height="wrap_content"
-          android:layout_marginBottom="5dp"
-          android:elevation="2dp"
-          app:cardElevation="2dp">
-
-          <LinearLayout
-            android:layout_width="match_parent"
+          <TextView
+            android:id="@+id/crash_reason"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
-            android:orientation="vertical">
+            android:layout_marginTop="10dp"
+            android:textColor="@color/cardview_dark_background"
+            android:textSize="15sp"
+            tools:text="Reason of crash"/>
+        </LinearLayout>
+      </android.support.v7.widget.CardView>
 
-            <TextView
-              android:layout_width="wrap_content"
-              android:layout_height="wrap_content"
-              android:layout_marginBottom="10dp"
-              android:text="@string/about_phone"
-              android:textColor="@color/sherlock_colorAccent"
-              android:textSize="15sp"
-              android:textStyle="bold"/>
+      <android.support.v7.widget.CardView
+        style="@style/CardViewStyle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="5dp"
+        android:elevation="2dp"
+        app:cardElevation="2dp">
 
-            <android.support.v7.widget.CardView
-              android:layout_width="match_parent"
-              android:layout_height="wrap_content"
-              app:cardElevation="3dp">
+        <LinearLayout
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:layout_margin="10dp"
+          android:orientation="vertical">
 
-              <include
-                layout="@layout/device_info"
-                android:layout_width="match_parent"
+          <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            android:text="@string/stack_trace"
+            android:textColor="@color/sherlock_colorAccent"
+            android:textSize="15sp"
+            android:textStyle="bold"/>
+
+          <android.support.v7.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:cardElevation="3dp">
+
+            <HorizontalScrollView
+              android:layout_width="fill_parent"
+              android:layout_height="fill_parent"
+              android:layout_marginTop="10dp">
+
+              <TextView
+                android:id="@+id/stacktrace"
+                android:layout_width="40dp"
                 android:layout_height="wrap_content"
-                app:viewModel="@{viewModel}"/>
-            </android.support.v7.widget.CardView>
-          </LinearLayout>
-        </android.support.v7.widget.CardView>
+                android:scrollHorizontally="true"
+                android:textColor="@color/cardview_dark_background"/>
+            </HorizontalScrollView>
+          </android.support.v7.widget.CardView>
+        </LinearLayout>
+      </android.support.v7.widget.CardView>
 
-        <android.support.v7.widget.CardView
-          style="@style/CardViewStyle"
+      <android.support.v7.widget.CardView
+        style="@style/CardViewStyle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="5dp"
+        android:elevation="2dp"
+        app:cardElevation="2dp">
+
+        <LinearLayout
           android:layout_width="match_parent"
           android:layout_height="wrap_content"
-          android:layout_marginBottom="5dp"
-          android:elevation="2dp"
-          app:cardElevation="2dp">
+          android:layout_margin="10dp"
+          android:orientation="vertical">
 
-          <LinearLayout
+          <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            android:text="@string/about_phone"
+            android:textColor="@color/sherlock_colorAccent"
+            android:textSize="15sp"
+            android:textStyle="bold"/>
+
+          <android.support.v7.widget.CardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="10dp"
-            android:orientation="vertical">
+            app:cardElevation="3dp">
 
-            <TextView
-              android:layout_width="wrap_content"
-              android:layout_height="wrap_content"
-              android:layout_marginBottom="10dp"
-              android:text="@string/about_app"
-              android:textColor="@color/sherlock_colorAccent"
-              android:textSize="15sp"
-              android:textStyle="bold"/>
-
-            <android.support.v7.widget.CardView
+            <include
+              layout="@layout/device_info"
               android:layout_width="match_parent"
-              android:layout_height="wrap_content"
-              app:cardElevation="3dp">
+              android:layout_height="wrap_content"/>
+          </android.support.v7.widget.CardView>
+        </LinearLayout>
+      </android.support.v7.widget.CardView>
 
-              <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:orientation="vertical">
+      <android.support.v7.widget.CardView
+        style="@style/CardViewStyle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="5dp"
+        android:elevation="2dp"
+        app:cardElevation="2dp">
 
-                <android.support.v7.widget.RecyclerView
-                  android:id="@+id/app_info_details"
-                  android:layout_width="match_parent"
-                  android:layout_height="match_parent"
-                  android:layout_marginEnd="5dp"
-                  android:layout_marginStart="5dp"
-                  android:layout_marginTop="10dp"
-                  android:scrollbars="vertical"/>
-              </LinearLayout>
-            </android.support.v7.widget.CardView>
-          </LinearLayout>
-        </android.support.v7.widget.CardView>
-      </LinearLayout>
-    </ScrollView>
-  </LinearLayout>
-</layout>
+        <LinearLayout
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:layout_margin="10dp"
+          android:orientation="vertical">
+
+          <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            android:text="@string/about_app"
+            android:textColor="@color/sherlock_colorAccent"
+            android:textSize="15sp"
+            android:textStyle="bold"/>
+
+          <android.support.v7.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:cardElevation="3dp">
+
+            <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                          android:layout_width="match_parent"
+                          android:layout_height="match_parent"
+                          android:orientation="vertical">
+
+              <android.support.v7.widget.RecyclerView
+                android:id="@+id/app_info_details"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginEnd="5dp"
+                android:layout_marginStart="5dp"
+                android:layout_marginTop="10dp"
+                android:scrollbars="vertical"/>
+            </LinearLayout>
+          </android.support.v7.widget.CardView>
+        </LinearLayout>
+      </android.support.v7.widget.CardView>
+    </LinearLayout>
+  </ScrollView>
+</LinearLayout>

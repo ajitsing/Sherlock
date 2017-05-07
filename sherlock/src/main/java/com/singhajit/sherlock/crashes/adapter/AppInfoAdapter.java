@@ -1,14 +1,14 @@
 package com.singhajit.sherlock.crashes.adapter;
 
-import android.databinding.DataBindingUtil;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import com.singhajit.sherlock.R;
 import com.singhajit.sherlock.crashes.viewmodel.AppInfoRowViewModel;
 import com.singhajit.sherlock.crashes.viewmodel.AppInfoViewModel;
-import com.singhajit.sherlock.databinding.AppInfoRowBinding;
 
 import java.util.List;
 
@@ -21,8 +21,9 @@ public class AppInfoAdapter extends RecyclerView.Adapter<AppInfoViewHolder> {
 
   @Override
   public AppInfoViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-    AppInfoRowBinding binding = DataBindingUtil.inflate(LayoutInflater.from(parent.getContext()), R.layout.app_info_row, parent, false);
-    return new AppInfoViewHolder(binding);
+    LayoutInflater inflater = LayoutInflater.from(parent.getContext());
+    LinearLayout appInfoView = (LinearLayout) inflater.inflate(R.layout.app_info_row, parent, false);
+    return new AppInfoViewHolder(appInfoView);
   }
 
   @Override
@@ -37,15 +38,19 @@ public class AppInfoAdapter extends RecyclerView.Adapter<AppInfoViewHolder> {
 }
 
 class AppInfoViewHolder extends RecyclerView.ViewHolder {
-  private final AppInfoRowBinding binding;
+  private final LinearLayout rootView;
 
-  AppInfoViewHolder(AppInfoRowBinding binding) {
-    super(binding.getRoot());
-    this.binding = binding;
+  AppInfoViewHolder(LinearLayout rootView) {
+    super(rootView);
+    this.rootView = rootView;
   }
 
   void render(AppInfoRowViewModel appInfoViewModel) {
-    binding.setAppInfo(appInfoViewModel);
+    TextView appInfoAttr = (TextView) rootView.findViewById(R.id.app_info_attr);
+    TextView appInfoVal = (TextView) rootView.findViewById(R.id.app_info_val);
+
+    appInfoAttr.setText(appInfoViewModel.getAttr());
+    appInfoVal.setText(appInfoViewModel.getVal());
   }
 }
 

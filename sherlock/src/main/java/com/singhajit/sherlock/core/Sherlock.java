@@ -12,8 +12,6 @@ import com.singhajit.sherlock.core.investigation.DefaultAppInfoProvider;
 import com.singhajit.sherlock.core.realm.SherlockRealm;
 import com.singhajit.sherlock.core.repo.CrashReports;
 
-import org.jetbrains.annotations.NotNull;
-
 import java.util.List;
 
 public class Sherlock {
@@ -29,7 +27,7 @@ public class Sherlock {
     appInfoProvider = new DefaultAppInfoProvider(context);
   }
 
-  public static void init(@NotNull final Context context) {
+  public static void init(final Context context) {
     Log.d(TAG, "Initializing Sherlock...");
     instance = new Sherlock(context);
 
@@ -69,7 +67,7 @@ public class Sherlock {
     Log.d(TAG, "Crash analysis completed!");
   }
 
-  public static void setAppInfoProvider(@NotNull AppInfoProvider appInfoProvider) {
+  public static void setAppInfoProvider(AppInfoProvider appInfoProvider) {
     getInstance().appInfoProvider = appInfoProvider;
   }
 
