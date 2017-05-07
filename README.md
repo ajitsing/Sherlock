@@ -14,6 +14,9 @@ start fixing the crash immediately. Now with the help of Sherlock, any tester wi
 
 ![Alt text](https://github.com/ajitsing/ScreenShots/blob/master/sherlock/sherlock_demo.gif)
 
+## Demo
+[![](https://github.com/ajitsing/ScreenShots/blob/master/sherlock/sherlock_youtube.png)](https://www.youtube.com/watch?v=cEQBJkTeRUQ "Demo")
+
 ## Installation
 ```groovy
 android {
