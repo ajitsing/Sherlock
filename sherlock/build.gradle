@@ -7,7 +7,7 @@ publishing {
         mavenJava(MavenPublication) {
             groupId 'com.github.ajitsing'
             artifactId 'sherlock'
-            version '1.0.0'
+            version '1.0.1'
             artifact bundleRelease
             pom.withXml {
                 def dependenciesNode = asNode().appendNode('dependencies')
@@ -38,7 +38,7 @@ android {
         minSdkVersion 16
         targetSdkVersion 25
         versionCode 1
-        versionName "1.0"
+        versionName "1.0.1"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
     buildTypes {
