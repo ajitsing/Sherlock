@@ -7,18 +7,16 @@ import android.support.test.InstrumentationRegistry;
 import android.support.test.espresso.intent.rule.IntentsTestRule;
 
 import com.singhajit.sherlock.R;
-import com.singhajit.sherlock.RealmResetRule;
+import com.singhajit.sherlock.core.database.CrashRecord;
+import com.singhajit.sherlock.core.database.DatabaseResetRule;
+import com.singhajit.sherlock.core.database.SherlockDatabaseHelper;
 import com.singhajit.sherlock.core.investigation.Crash;
-import com.singhajit.sherlock.core.realm.SherlockRealm;
-import com.singhajit.sherlock.core.repo.CrashReports;
 
 import org.junit.Rule;
 import org.junit.Test;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
-
-import io.realm.Realm;
 
 import static android.support.test.espresso.Espresso.onView;
 import static android.support.test.espresso.action.ViewActions.click;
@@ -39,23 +37,27 @@ import static org.hamcrest.core.IsNot.not;
 
 public class CrashListActivityTest {
   @Rule
-  public RealmResetRule realmResetRule = new RealmResetRule();
+  public DatabaseResetRule databaseResetRule = new DatabaseResetRule();
 
   @Rule
   public IntentsTestRule<CrashListActivity> rule = new IntentsTestRule<>(CrashListActivity.class, true, false);
 
   @Test
   public void shouldRenderAllCrashes() throws Exception {
-    Realm realm = SherlockRealm.create(InstrumentationRegistry.getTargetContext());
-    CrashReports crashReports = new CrashReports(realm);
+    SherlockDatabaseHelper database = new SherlockDatabaseHelper(InstrumentationRegistry.getTargetContext());
     String placeOfCrash1 = "com.singhajit.Sherlock:10";
     String stackTrace1 = "Crash 1 details";
 
     String placeOfCrash2 = "com.singhajit.SherlockAssistant:5";
     String stackTrace2 = "Crash 2 details";
 
-    crashReports.add(new Crash(placeOfCrash1, "Reason of crash", stackTrace1));
-    crashReports.add(new Crash(placeOfCrash2, "Reason of crash", stackTrace2));
+    Crash crash1 = new Crash(placeOfCrash1, "Reason of crash", stackTrace1);
+    crash1.setId(1);
+    Crash crash2 = new Crash(placeOfCrash2, "Reason of crash", stackTrace2);
+    crash2.setId(2);
+
+    database.insertCrash(CrashRecord.createFrom(crash1));
+    database.insertCrash(CrashRecord.createFrom(crash2));
 
     rule.launchActivity(null);
     SimpleDateFormat simpleDateFormat = new SimpleDateFormat("MMM d, yyyy");
@@ -75,12 +77,13 @@ public class CrashListActivityTest {
 
   @Test
   public void shouldOpenCrashDetails() throws Exception {
-    Realm realm = SherlockRealm.create(InstrumentationRegistry.getTargetContext());
-    CrashReports crashReports = new CrashReports(realm);
+    SherlockDatabaseHelper database = new SherlockDatabaseHelper(InstrumentationRegistry.getTargetContext());
     String placeOfCrash1 = "com.singhajit.Sherlock:10";
     String stackTrace1 = "Crash 1 details";
 
-    crashReports.add(new Crash(placeOfCrash1, "Reason of crash", stackTrace1));
+    Crash crash1 = new Crash(placeOfCrash1, "Reason of crash", stackTrace1);
+    crash1.setId(1);
+    database.insertCrash(CrashRecord.createFrom(crash1));
 
     rule.launchActivity(null);
 

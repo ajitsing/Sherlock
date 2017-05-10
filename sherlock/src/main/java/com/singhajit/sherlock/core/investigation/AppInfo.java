@@ -1,18 +1,14 @@
 package com.singhajit.sherlock.core.investigation;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
 
-import io.realm.RealmList;
-import io.realm.RealmObject;
+public class AppInfo {
+  private List<Pair> appDetails = new ArrayList<>();
 
-public class AppInfo extends RealmObject {
-  private RealmList<Pair> appDetails = new RealmList<>();
-
-  public AppInfo() {
-  }
-
-  private AppInfo(RealmList<Pair> appDetails) {
+  private AppInfo(List<Pair> appDetails) {
     this.appDetails = appDetails;
   }
 
@@ -25,7 +21,7 @@ public class AppInfo extends RealmObject {
   }
 
   public static class Builder {
-    RealmList<Pair> appDetails = new RealmList<>();
+    List<Pair> appDetails = new ArrayList<>();
 
     public Builder with(String key, String value) {
       appDetails.add(new Pair(key, value));

@@ -1,13 +1,8 @@
 package com.singhajit.sherlock.core.investigation;
 
-import io.realm.RealmObject;
-
-public class Pair extends RealmObject {
+public class Pair {
   private String key;
   private String val;
-
-  public Pair() {
-  }
 
   public Pair(String key, String val) {
     this.key = key;

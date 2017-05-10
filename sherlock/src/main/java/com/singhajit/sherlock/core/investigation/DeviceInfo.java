@@ -1,17 +1,12 @@
 package com.singhajit.sherlock.core.investigation;
 
-import io.realm.RealmObject;
-
-public class DeviceInfo extends RealmObject {
+public class DeviceInfo {
   private String brand;
   private String manufacturer;
   private String name;
   private String sdk;
 
-  public DeviceInfo() {
-  }
-
-  public DeviceInfo(String brand, String manufacturer, String name, String sdk) {
+  private DeviceInfo(String brand, String manufacturer, String name, String sdk) {
     this.brand = brand;
     this.manufacturer = manufacturer;
     this.name = name;

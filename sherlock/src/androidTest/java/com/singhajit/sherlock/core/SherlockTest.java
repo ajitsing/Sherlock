@@ -3,19 +3,17 @@ package com.singhajit.sherlock.core;
 import android.content.Context;
 import android.support.test.InstrumentationRegistry;
 
-import com.singhajit.sherlock.RealmResetRule;
+import com.singhajit.sherlock.core.database.CrashRecord;
+import com.singhajit.sherlock.core.database.DatabaseResetRule;
+import com.singhajit.sherlock.core.database.SherlockDatabaseHelper;
 import com.singhajit.sherlock.core.investigation.AppInfo;
 import com.singhajit.sherlock.core.investigation.AppInfoProvider;
 import com.singhajit.sherlock.core.investigation.Crash;
-import com.singhajit.sherlock.core.realm.SherlockRealm;
-import com.singhajit.sherlock.core.repo.CrashReports;
 
 import org.junit.Rule;
 import org.junit.Test;
 
 import java.util.List;
-
-import io.realm.Realm;
 
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
@@ -23,23 +21,26 @@ import static org.junit.Assert.assertThat;
 public class SherlockTest {
 
   @Rule
-  public RealmResetRule realmResetRule = new RealmResetRule();
+  public DatabaseResetRule databaseResetRule = new DatabaseResetRule();
 
   @Test
   public void shouldReturnAllCapturedCrashes() throws Exception {
     Context targetContext = InstrumentationRegistry.getTargetContext();
     Sherlock.init(targetContext);
 
-    Realm realm = SherlockRealm.create(targetContext);
-    CrashReports crashReports = new CrashReports(realm);
+    SherlockDatabaseHelper database = new SherlockDatabaseHelper(targetContext);
     String placeOfCrash1 = "com.singhajit.Sherlock:10";
     String stackTrace1 = "Crash 1 details";
 
     String placeOfCrash2 = "com.singhajit.SherlockAssistant:5";
     String stackTrace2 = "Crash 2 details";
 
-    crashReports.add(new Crash(placeOfCrash1, "Reason of crash", stackTrace1));
-    crashReports.add(new Crash(placeOfCrash2, "Reason of crash", stackTrace2));
+    Crash crash1 = new Crash(placeOfCrash1, "Reason of crash", stackTrace1);
+    crash1.setId(1);
+    Crash crash2 = new Crash(placeOfCrash2, "Reason of crash", stackTrace2);
+    crash2.setId(2);
+    database.insertCrash(CrashRecord.createFrom(crash1));
+    database.insertCrash(CrashRecord.createFrom(crash2));
 
     List<Crash> allCrashes = Sherlock.getInstance().getAllCrashes();
 

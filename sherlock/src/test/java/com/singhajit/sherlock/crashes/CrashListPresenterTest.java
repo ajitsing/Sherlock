@@ -1,9 +1,9 @@
 package com.singhajit.sherlock.crashes;
 
+import com.singhajit.sherlock.core.database.SherlockDatabaseHelper;
 import com.singhajit.sherlock.core.investigation.AppInfo;
 import com.singhajit.sherlock.core.investigation.Crash;
 import com.singhajit.sherlock.core.investigation.CrashViewModel;
-import com.singhajit.sherlock.core.repo.CrashReports;
 import com.singhajit.sherlock.crashes.action.CrashListActions;
 import com.singhajit.sherlock.crashes.presenter.CrashListPresenter;
 import com.singhajit.sherlock.crashes.viewmodel.CrashesViewModel;
@@ -24,16 +24,16 @@ public class CrashListPresenterTest {
   public void shouldRenderAllCrashes() throws Exception {
     CrashListActions actions = mock(CrashListActions.class);
     CrashListPresenter presenter = new CrashListPresenter(actions);
-    CrashReports crashReports = mock(CrashReports.class);
+    SherlockDatabaseHelper database = mock(SherlockDatabaseHelper.class);
     Crash crash1 = mock(Crash.class);
     when(crash1.getId()).thenReturn(1);
     when(crash1.getAppInfo()).thenReturn(mock(AppInfo.class));
     Crash crash2 = mock(Crash.class);
     when(crash2.getAppInfo()).thenReturn(mock(AppInfo.class));
     List<Crash> crashes = asList(crash1, crash2);
-    when(crashReports.getAll()).thenReturn(crashes);
+    when(database.getCrashes()).thenReturn(crashes);
 
-    presenter.render(crashReports);
+    presenter.render(database);
 
     verify(actions).render(argThat(new CustomTypeSafeMatcher<CrashesViewModel>("") {
       @Override

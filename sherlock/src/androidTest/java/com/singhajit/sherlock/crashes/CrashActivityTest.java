@@ -6,19 +6,17 @@ import android.support.test.InstrumentationRegistry;
 import android.support.test.rule.ActivityTestRule;
 
 import com.singhajit.sherlock.R;
-import com.singhajit.sherlock.RealmResetRule;
 import com.singhajit.sherlock.core.Sherlock;
+import com.singhajit.sherlock.core.database.CrashRecord;
+import com.singhajit.sherlock.core.database.DatabaseResetRule;
+import com.singhajit.sherlock.core.database.SherlockDatabaseHelper;
 import com.singhajit.sherlock.core.investigation.AppInfo;
 import com.singhajit.sherlock.core.investigation.AppInfoProvider;
 import com.singhajit.sherlock.core.investigation.Crash;
-import com.singhajit.sherlock.core.realm.SherlockRealm;
-import com.singhajit.sherlock.core.repo.CrashReports;
 import com.singhajit.sherlock.crashes.activity.CrashActivity;
 
 import org.junit.Rule;
 import org.junit.Test;
-
-import io.realm.Realm;
 
 import static android.support.test.espresso.Espresso.onView;
 import static android.support.test.espresso.action.ViewActions.scrollTo;
@@ -32,7 +30,7 @@ import static org.hamcrest.Matchers.allOf;
 public class CrashActivityTest {
 
   @Rule
-  public RealmResetRule realmResetRule = new RealmResetRule();
+  public DatabaseResetRule databaseResetRule = new DatabaseResetRule();
 
   @Rule
   public ActivityTestRule<CrashActivity> rule = new ActivityTestRule<>(CrashActivity.class, true, false);
@@ -51,8 +49,7 @@ public class CrashActivityTest {
       }
     });
 
-    Realm realm = SherlockRealm.create(targetContext);
-    CrashReports crashReports = new CrashReports(realm);
+    SherlockDatabaseHelper database = new SherlockDatabaseHelper(targetContext);
     String placeOfCrash = "com.singhajit.Sherlock:10";
     String stackTrace = "Thread: Main Thread\n" +
         "Message: Full Message\n" +
@@ -62,7 +59,9 @@ public class CrashActivityTest {
         "at Class1.method1(file1:1)\n" +
         "at Class2.method2(file2:2)\n";
 
-    crashReports.add(new Crash(placeOfCrash, "Reason of crash", stackTrace));
+    Crash crash1 = new Crash(placeOfCrash, "Reason of crash", stackTrace);
+    crash1.setId(1);
+    database.insertCrash(CrashRecord.createFrom(crash1));
 
     Intent intent = new Intent();
     intent.putExtra(CrashActivity.CRASH_ID, 1);

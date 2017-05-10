@@ -1,8 +1,8 @@
 package com.singhajit.sherlock.crashes.presenter;
 
+import com.singhajit.sherlock.core.database.SherlockDatabaseHelper;
 import com.singhajit.sherlock.core.investigation.Crash;
 import com.singhajit.sherlock.core.investigation.CrashViewModel;
-import com.singhajit.sherlock.core.repo.CrashReports;
 import com.singhajit.sherlock.crashes.action.CrashListActions;
 import com.singhajit.sherlock.crashes.viewmodel.CrashesViewModel;
 
@@ -16,8 +16,8 @@ public class CrashListPresenter {
     this.actions = actions;
   }
 
-  public void render(CrashReports crashReports) {
-    List<Crash> crashes = crashReports.getAll();
+  public void render(SherlockDatabaseHelper database) {
+    List<Crash> crashes = database.getCrashes();
     ArrayList<CrashViewModel> crashViewModels = new ArrayList<>();
     for (Crash crash : crashes) {
       crashViewModels.add(new CrashViewModel(crash));

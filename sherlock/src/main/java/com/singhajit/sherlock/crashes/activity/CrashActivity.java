@@ -10,9 +10,8 @@ import android.view.MenuItem;
 import android.widget.TextView;
 
 import com.singhajit.sherlock.R;
+import com.singhajit.sherlock.core.database.SherlockDatabaseHelper;
 import com.singhajit.sherlock.core.investigation.CrashViewModel;
-import com.singhajit.sherlock.core.realm.SherlockRealm;
-import com.singhajit.sherlock.core.repo.CrashReports;
 import com.singhajit.sherlock.crashes.action.CrashActions;
 import com.singhajit.sherlock.crashes.adapter.AppInfoAdapter;
 import com.singhajit.sherlock.crashes.presenter.CrashPresenter;
@@ -33,7 +32,7 @@ public class CrashActivity extends BaseActivity implements CrashActions {
     enableHomeButton((Toolbar) findViewById(R.id.toolbar));
     setTitle(R.string.crash_report);
 
-    presenter = new CrashPresenter(new CrashReports(SherlockRealm.create(this)), this);
+    presenter = new CrashPresenter(new SherlockDatabaseHelper(this), this);
     presenter.render(crashId);
   }
 

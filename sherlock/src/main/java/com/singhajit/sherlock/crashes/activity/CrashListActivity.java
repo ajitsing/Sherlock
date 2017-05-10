@@ -12,8 +12,7 @@ import android.view.MenuItem;
 import android.widget.LinearLayout;
 
 import com.singhajit.sherlock.R;
-import com.singhajit.sherlock.core.realm.SherlockRealm;
-import com.singhajit.sherlock.core.repo.CrashReports;
+import com.singhajit.sherlock.core.database.SherlockDatabaseHelper;
 import com.singhajit.sherlock.crashes.action.CrashListActions;
 import com.singhajit.sherlock.crashes.adapter.CrashAdapter;
 import com.singhajit.sherlock.crashes.presenter.CrashListPresenter;
@@ -31,9 +30,9 @@ public class CrashListActivity extends BaseActivity implements CrashListActions 
     enableHomeButton((Toolbar) findViewById(R.id.toolbar));
     setTitle(R.string.app_name);
 
-    CrashReports crashReports = new CrashReports(SherlockRealm.create(this));
+    SherlockDatabaseHelper database = new SherlockDatabaseHelper(this);
     presenter = new CrashListPresenter(this);
-    presenter.render(crashReports);
+    presenter.render(database);
   }
 
   @Override

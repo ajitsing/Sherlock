@@ -1,9 +1,9 @@
 package com.singhajit.sherlock.crashes;
 
+import com.singhajit.sherlock.core.database.SherlockDatabaseHelper;
 import com.singhajit.sherlock.core.investigation.AppInfo;
 import com.singhajit.sherlock.core.investigation.Crash;
 import com.singhajit.sherlock.core.investigation.CrashViewModel;
-import com.singhajit.sherlock.core.repo.CrashReports;
 import com.singhajit.sherlock.crashes.action.CrashActions;
 import com.singhajit.sherlock.crashes.presenter.CrashPresenter;
 import com.singhajit.sherlock.crashes.viewmodel.AppInfoViewModel;
@@ -20,14 +20,14 @@ import static org.mockito.Mockito.when;
 public class CrashPresenterTest {
   @Test
   public void shouldInitializeCrashView() throws Exception {
-    CrashReports crashReports = mock(CrashReports.class);
+    SherlockDatabaseHelper database = mock(SherlockDatabaseHelper.class);
     Crash crash = mock(Crash.class);
     when(crash.getId()).thenReturn(1);
     AppInfo appInfo = mock(AppInfo.class);
     when(crash.getAppInfo()).thenReturn(appInfo);
-    when(crashReports.get(1)).thenReturn(crash);
+    when(database.getCrashById(1)).thenReturn(crash);
     CrashActions actions = mock(CrashActions.class);
-    CrashPresenter presenter = new CrashPresenter(crashReports, actions);
+    CrashPresenter presenter = new CrashPresenter(database, actions);
 
     presenter.render(1);
 
