@@ -19,18 +19,10 @@ start fixing the crash immediately. Now with the help of Sherlock, any tester wi
 
 ## Installation
 ```groovy
-android {
-    dataBinding {
-      enabled = true
-    }
-}
-
-compile('com.github.ajitsing:sherlock:1.0.0@aar') {
+compile('com.github.ajitsing:sherlock:1.0.1@aar') {
     transitive = true
 }
 ```
-
-Sherlock usages data binding, so make sure that you have enabled data binding for your app.
 
 ## Usage
 To start using Sherlock just add the below line in the ```onCreate()``` method of Application class.
