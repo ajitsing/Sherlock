@@ -19,9 +19,10 @@ start fixing the crash immediately. Now with the help of Sherlock, any tester wi
 
 ## Installation
 ```groovy
-compile('com.github.ajitsing:sherlock:1.0.1@aar') {
+debugCompile('com.github.ajitsing:sherlock:1.0.2@aar') {
     transitive = true
 }
+releaseCompile('com.github.ajitsing:sherlock-no-op:1.0.2@aar')
 ```
 
 ## Usage
