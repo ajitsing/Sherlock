@@ -6,7 +6,7 @@ publishing {
         mavenJava(MavenPublication) {
             groupId 'com.github.ajitsing'
             artifactId project.ext.artifactId
-            version '1.0.1'
+            version rootProject.ext.VERSION_NAME
             artifact bundleRelease
             pom.withXml {
                 def dependenciesNode = asNode().appendNode('dependencies')
