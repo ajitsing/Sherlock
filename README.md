@@ -4,7 +4,7 @@
 [![Maven Central](https://img.shields.io/maven-central/v/com.github.ajitsing/sherlock.svg)](https://mvnrepository.com/artifact/com.github.ajitsing/sherlock)
 ![API](https://img.shields.io/badge/API-16%2B-blue.svg)
 
-Sherlock reports any crash that occurres in your application as a notification. You just need to initialize Sherlock at the start of your application and it will take care of the rest.
+Sherlock reports any crash that occurres in your application as a notification. You just need to initialize Sherlock at the start of your application and it will take care of the rest. 
 
 ## Motivation
 The motivation behind creating Sherlock is to make the life of Developer and tester easier. Whenever a tester is testing
