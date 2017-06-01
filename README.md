@@ -1,6 +1,6 @@
 # Sherlock
 [![Build Status](https://travis-ci.org/ajitsing/Sherlock.svg?branch=master)](https://travis-ci.org/ajitsing/Sherlock)
-[![LICENSE](https://img.shields.io/badge/license-Apache-blue.svg)](https://github.com/ajitsing/Sherlock/blob/master/LICENSE.txt)
+[![Open Source Love](https://badges.frapsoft.com/os/v1/open-source.svg?v=102)](https://opensource.org/licenses/Apache-2.0)
 [![Maven Central](https://img.shields.io/maven-central/v/com.github.ajitsing/sherlock.svg)](https://mvnrepository.com/artifact/com.github.ajitsing/sherlock)
 ![API](https://img.shields.io/badge/API-16%2B-blue.svg)
 
