@@ -3,6 +3,7 @@
 [![Open Source Love](https://badges.frapsoft.com/os/v1/open-source.svg?v=102)](https://opensource.org/licenses/Apache-2.0)
 [![Maven Central](https://img.shields.io/maven-central/v/com.github.ajitsing/sherlock.svg)](https://mvnrepository.com/artifact/com.github.ajitsing/sherlock)
 ![API](https://img.shields.io/badge/API-16%2B-blue.svg)
+[![Twitter](https://img.shields.io/twitter/url/http/shields.io.svg?style=social)](https://twitter.com/Ajit5ingh)
 
 Sherlock reports any crash that occurres in your application as a notification. You just need to initialize Sherlock at the start of your application and it will take care of the rest. 
 
