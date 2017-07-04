@@ -10,7 +10,7 @@ public class CrashTable implements BaseColumns {
   public static final String DATE = "date";
 
   public static final String CREATE_QUERY = "create table " + TABLE_NAME + " (" +
-      _ID + " INTEGER, " +
+      _ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
       PLACE + " TEXT, " +
       REASON + " TEXT, " +
       STACKTRACE + " TEXT, " +

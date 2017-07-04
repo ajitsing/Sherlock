@@ -48,10 +48,6 @@ public class Crash {
     return appInfo;
   }
 
-  public void setId(int id) {
-    this.id = id;
-  }
-
   public Class<Crash> getType() {
     return Crash.class;
   }

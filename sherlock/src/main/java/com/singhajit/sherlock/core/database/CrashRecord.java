@@ -5,22 +5,16 @@ import com.singhajit.sherlock.core.investigation.Crash;
 import java.text.SimpleDateFormat;
 
 public class CrashRecord {
-  private final int id;
   private String place;
   private String reason;
   private String date;
   private String stackTrace;
 
-  public CrashRecord(int id, String place, String reason, String date, String stackTrace) {
-    this.id = id;
+  public CrashRecord(String place, String reason, String date, String stackTrace) {
     this.place = place;
     this.reason = reason;
     this.date = date;
     this.stackTrace = stackTrace;
-  }
-
-  public int getId() {
-    return id;
   }
 
   public String getPlace() {
@@ -41,6 +35,6 @@ public class CrashRecord {
 
   public static CrashRecord createFrom(Crash crash) {
     SimpleDateFormat dateFormat = new SimpleDateFormat(Crash.DATE_FORMAT);
-    return new CrashRecord(crash.getId(), crash.getPlace(), crash.getReason(), dateFormat.format(crash.getDate()), crash.getStackTrace());
+    return new CrashRecord(crash.getPlace(), crash.getReason(), dateFormat.format(crash.getDate()), crash.getStackTrace());
   }
 }

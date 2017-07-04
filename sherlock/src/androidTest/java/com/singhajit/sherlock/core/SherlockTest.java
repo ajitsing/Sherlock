@@ -36,9 +36,7 @@ public class SherlockTest {
     String stackTrace2 = "Crash 2 details";
 
     Crash crash1 = new Crash(placeOfCrash1, "Reason of crash", stackTrace1);
-    crash1.setId(1);
     Crash crash2 = new Crash(placeOfCrash2, "Reason of crash", stackTrace2);
-    crash2.setId(2);
     database.insertCrash(CrashRecord.createFrom(crash1));
     database.insertCrash(CrashRecord.createFrom(crash2));
 

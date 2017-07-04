@@ -31,27 +31,12 @@ public class SherlockDatabaseHelperTest {
   }
 
   @Test
-  public void shouldGetNextCrashIdWhenTableIsEmpty() throws Exception {
-    assertThat(database.getNextCrashId(), is(1));
-  }
-
-  @Test
-  public void shouldGetNextCrashIdWhenTableHasEntries() throws Exception {
-    SimpleDateFormat simpleDateFormat = new SimpleDateFormat(Crash.DATE_FORMAT);
-    Date date = new Date();
-    CrashRecord crashRecord = new CrashRecord(1, "place1", "reason1", simpleDateFormat.format(date), "stacktrace1");
-    database.insertCrash(crashRecord);
-
-    assertThat(database.getNextCrashId(), is(2));
-  }
-
-  @Test
   public void shouldGetAllCrashes() throws Exception {
     SimpleDateFormat simpleDateFormat = new SimpleDateFormat(Crash.DATE_FORMAT);
     Date date1 = new Date();
     Date date2 = new Date();
-    CrashRecord crashRecord1 = new CrashRecord(1, "place1", "reason1", simpleDateFormat.format(date1), "stacktrace1");
-    CrashRecord crashRecord2 = new CrashRecord(2, "place2", "reason2", simpleDateFormat.format(date2), "stacktrace2");
+    CrashRecord crashRecord1 = new CrashRecord("place1", "reason1", simpleDateFormat.format(date1), "stacktrace1");
+    CrashRecord crashRecord2 = new CrashRecord("place2", "reason2", simpleDateFormat.format(date2), "stacktrace2");
     database.insertCrash(crashRecord1);
     database.insertCrash(crashRecord2);
 
@@ -71,12 +56,12 @@ public class SherlockDatabaseHelperTest {
     SimpleDateFormat simpleDateFormat = new SimpleDateFormat(Crash.DATE_FORMAT);
     Date date1 = new Date();
     Date date2 = new Date();
-    CrashRecord crashRecord1 = new CrashRecord(1, "place1", "reason1", simpleDateFormat.format(date1), "stacktrace1");
-    CrashRecord crashRecord2 = new CrashRecord(2, "place2", "reason2", simpleDateFormat.format(date2), "stacktrace2");
+    CrashRecord crashRecord1 = new CrashRecord("place1", "reason1", simpleDateFormat.format(date1), "stacktrace1");
+    CrashRecord crashRecord2 = new CrashRecord("place2", "reason2", simpleDateFormat.format(date2), "stacktrace2");
     database.insertCrash(crashRecord1);
-    database.insertCrash(crashRecord2);
+    int crash2Id = database.insertCrash(crashRecord2);
 
-    Crash crash = database.getCrashById(2);
+    Crash crash = database.getCrashById(crash2Id);
 
     assertNotNull(crash);
     assertThat(crash.getReason(), is("reason2"));

@@ -52,9 +52,7 @@ public class CrashListActivityTest {
     String stackTrace2 = "Crash 2 details";
 
     Crash crash1 = new Crash(placeOfCrash1, "Reason of crash", stackTrace1);
-    crash1.setId(1);
     Crash crash2 = new Crash(placeOfCrash2, "Reason of crash", stackTrace2);
-    crash2.setId(2);
 
     database.insertCrash(CrashRecord.createFrom(crash1));
     database.insertCrash(CrashRecord.createFrom(crash2));
@@ -82,8 +80,7 @@ public class CrashListActivityTest {
     String stackTrace1 = "Crash 1 details";
 
     Crash crash1 = new Crash(placeOfCrash1, "Reason of crash", stackTrace1);
-    crash1.setId(1);
-    database.insertCrash(CrashRecord.createFrom(crash1));
+    int crashId = database.insertCrash(CrashRecord.createFrom(crash1));
 
     rule.launchActivity(null);
 
@@ -91,7 +88,7 @@ public class CrashListActivityTest {
     onView(withRecyclerView(R.id.crash_list, 0)).perform(click());
     intended(allOf(
         hasComponent(CrashActivity.class.getName()),
-        hasExtra(CrashActivity.CRASH_ID, 1)));
+        hasExtra(CrashActivity.CRASH_ID, crashId)));
   }
 
   @Test

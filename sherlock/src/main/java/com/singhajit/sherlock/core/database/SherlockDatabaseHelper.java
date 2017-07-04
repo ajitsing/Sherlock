@@ -13,7 +13,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class SherlockDatabaseHelper extends SQLiteOpenHelper {
-  private static final int VERSION = 1;
+  private static final int VERSION = 2;
   private static final String DB_NAME = "Sherlock";
 
   public SherlockDatabaseHelper(Context context) {
@@ -31,17 +31,18 @@ public class SherlockDatabaseHelper extends SQLiteOpenHelper {
     sqLiteDatabase.execSQL(CrashTable.CREATE_QUERY);
   }
 
-  public void insertCrash(CrashRecord crashRecord) {
+  public int insertCrash(CrashRecord crashRecord) {
     ContentValues values = new ContentValues();
-    values.put(CrashTable._ID, crashRecord.getId());
     values.put(CrashTable.PLACE, crashRecord.getPlace());
     values.put(CrashTable.REASON, crashRecord.getReason());
     values.put(CrashTable.STACKTRACE, crashRecord.getStackTrace());
     values.put(CrashTable.DATE, crashRecord.getDate());
 
     SQLiteDatabase database = getWritableDatabase();
-    database.insert(CrashTable.TABLE_NAME, null, values);
+    long id = database.insert(CrashTable.TABLE_NAME, null, values);
     database.close();
+
+    return Long.valueOf(id).intValue();
   }
 
   public List<Crash> getCrashes() {
@@ -72,11 +73,6 @@ public class SherlockDatabaseHelper extends SQLiteOpenHelper {
     }
 
     return crash;
-  }
-
-  public int getNextCrashId() {
-    List<Crash> crashes = getCrashes();
-    return crashes.isEmpty() ? 1 : crashes.get(crashes.size() - 1).getId() + 1;
   }
 
   @NonNull

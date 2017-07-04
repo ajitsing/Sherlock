@@ -60,11 +60,10 @@ public class CrashActivityTest {
         "at Class2.method2(file2:2)\n";
 
     Crash crash1 = new Crash(placeOfCrash, "Reason of crash", stackTrace);
-    crash1.setId(1);
-    database.insertCrash(CrashRecord.createFrom(crash1));
+    int crashId = database.insertCrash(CrashRecord.createFrom(crash1));
 
     Intent intent = new Intent();
-    intent.putExtra(CrashActivity.CRASH_ID, 1);
+    intent.putExtra(CrashActivity.CRASH_ID, crashId);
 
     rule.launchActivity(intent);
 
