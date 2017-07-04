@@ -1,6 +1,6 @@
 package com.singhajit.sherlock.core.investigation;
 
-public class Pair {
+class Pair {
   private String key;
   private String val;
 
