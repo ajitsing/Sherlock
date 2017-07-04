@@ -1,4 +1,4 @@
-package com.singhajit.sherlock.crashes;
+package com.singhajit.sherlock.crashes.activity;
 
 import android.app.Activity;
 
