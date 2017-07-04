@@ -71,4 +71,8 @@ public class Crash {
   public Date getDate() {
     return date;
   }
+
+  public void setId(int id) {
+    this.id = id;
+  }
 }

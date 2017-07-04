@@ -62,7 +62,8 @@ public class Sherlock {
     Log.d(TAG, "Analyzing Crash...");
     CrashAnalyzer crashAnalyzer = new CrashAnalyzer(throwable);
     Crash crash = crashAnalyzer.getAnalysis();
-    instance.database.insertCrash(CrashRecord.createFrom(crash));
+    int crashId = instance.database.insertCrash(CrashRecord.createFrom(crash));
+    crash.setId(crashId);
     instance.crashReporter.report(new CrashViewModel(crash));
     Log.d(TAG, "Crash analysis completed!");
   }
