@@ -34,7 +34,7 @@ public class MyApplication extends Application {
   @Override
   public void onCreate() {
     super.onCreate();
-    Sherlock.init(this); //Intilializing Sherlock
+    Sherlock.init(this); //Initializing Sherlock
   }
 }
 ```
