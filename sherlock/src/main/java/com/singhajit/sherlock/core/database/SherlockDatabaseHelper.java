@@ -62,7 +62,7 @@ public class SherlockDatabaseHelper extends SQLiteOpenHelper {
   }
 
   public void clearCrashes() {
-    sqLiteDatabase.execSQL(CrashTable.DELETE_ALL);
+    getWritableDatabase().execSQL(CrashTable.DELETE_ALL);
   }
 
   public Crash getCrashById(int id) {
