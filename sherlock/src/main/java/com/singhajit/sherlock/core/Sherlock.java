@@ -58,6 +58,8 @@ public class Sherlock {
     return getInstance().database.getCrashes();
   }
 
+  public void clearAllCrashes() { return getInstance().database.clearCrashes(); }
+
   private static void analyzeAndReportCrash(Throwable throwable) {
     Log.d(TAG, "Analyzing Crash...");
     CrashAnalyzer crashAnalyzer = new CrashAnalyzer(throwable);
