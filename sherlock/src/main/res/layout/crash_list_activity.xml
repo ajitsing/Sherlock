@@ -6,6 +6,7 @@
   android:layout_height="match_parent"
   android:orientation="vertical">
 
+
   <android.support.design.widget.AppBarLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -21,6 +22,13 @@
       app:popupTheme="@style/ThemeOverlay.AppCompat.Light">
     </android.support.v7.widget.Toolbar>
   </android.support.design.widget.AppBarLayout>
+
+  <CheckBox
+      android:id="@+id/erase_crashes"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:checked="true"
+      android:text="@string/erase_all_crashes" />
 
   <LinearLayout
     android:id="@+id/no_crash_found_layout"
@@ -56,5 +64,8 @@
     android:layout_marginEnd="5dp"
     android:layout_marginStart="5dp"
     android:layout_marginTop="10dp"
-    android:scrollbars="vertical"/>
+    android:scrollbars="vertical">
+
+  </android.support.v7.widget.RecyclerView>
+
 </LinearLayout>

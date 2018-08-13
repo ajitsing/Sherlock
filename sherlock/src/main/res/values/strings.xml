@@ -12,4 +12,5 @@
   <string name="version">Version</string>
   <string name="not_found">404</string>
   <string name="github_link">https://github.com/ajitsing/Sherlock</string>
+  <string name="erase_all_crashes">Clear all crashes upon leaving</string>
 </resources>
