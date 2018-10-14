@@ -1,4 +1,5 @@
 # Sherlock
+[![Maintenance](https://img.shields.io/badge/Maintained%3F-yes-green.svg)](https://GitHub.com/ajitsing/Sherlock/graphs/commit-activity)
 [![Build Status](https://travis-ci.org/ajitsing/Sherlock.svg?branch=master)](https://travis-ci.org/ajitsing/Sherlock)
 [![HitCount](http://hits.dwyl.io/ajitsing/Sherlock.svg)](http://hits.dwyl.io/ajitsing/Sherlock)
 [![Open Source Love](https://badges.frapsoft.com/os/v1/open-source.svg?v=102)](https://opensource.org/licenses/Apache-2.0)
