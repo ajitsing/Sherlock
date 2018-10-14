@@ -22,15 +22,5 @@ android:
 jdk:
 - oraclejdk8
 
-before_script:
-- android list targets
-- echo no | android create avd --force -n test -t android-25 --abi google_apis/arm64-v8a
-- mksdcard -l e 756M sdcard.img
-- emulator -avd test -no-window -sdcard sdcard.img &
-- android-wait-for-emulator
-- adb shell settings put global window_animation_scale 0
-- adb shell settings put global transition_animation_scale 0
-- adb shell settings put global animator_duration_scale 0
-
 script:
-- "./gradlew clean sherlock:testDebugUnitTest sherlock:cC"
+- "./gradlew clean sherlock:testDebugUnitTest"
