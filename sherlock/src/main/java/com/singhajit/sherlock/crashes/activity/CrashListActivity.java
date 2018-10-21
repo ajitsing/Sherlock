@@ -9,6 +9,7 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.CheckBox;
 import android.widget.LinearLayout;
 
 import com.singhajit.sherlock.R;
@@ -18,8 +19,11 @@ import com.singhajit.sherlock.crashes.adapter.CrashAdapter;
 import com.singhajit.sherlock.crashes.presenter.CrashListPresenter;
 import com.singhajit.sherlock.crashes.viewmodel.CrashesViewModel;
 
-public class CrashListActivity extends BaseActivity implements CrashListActions {
+import static com.singhajit.sherlock.crashes.activity.CrashActivity.CRASH_ID;
 
+
+public class CrashListActivity extends BaseActivity implements CrashListActions {
+  public static final String CLEAR_CRASHES = "com.singhajit.sherlock.CLEAR_CRASHES";
   private CrashListPresenter presenter;
 
   @Override
@@ -27,12 +31,28 @@ public class CrashListActivity extends BaseActivity implements CrashListActions 
     super.onCreate(savedInstanceState);
     setContentView(R.layout.crash_list_activity);
 
+    Intent intent = getIntent();
+    boolean clearCrashes = intent.getBooleanExtra(CLEAR_CRASHES, false);
+    ((CheckBox) findViewById(R.id.erase_crashes)).setChecked(clearCrashes);
+
     enableHomeButton((Toolbar) findViewById(R.id.toolbar));
     setTitle(R.string.app_name);
 
     SherlockDatabaseHelper database = new SherlockDatabaseHelper(this);
     presenter = new CrashListPresenter(this);
     presenter.render(database);
+  }
+
+  @Override
+  protected void onDestroy()
+  {
+    CheckBox eraseAll = (CheckBox) findViewById(R.id.erase_crashes);
+    if (eraseAll != null && eraseAll.isChecked())
+    {
+      SherlockDatabaseHelper dbHelper = new SherlockDatabaseHelper(this);
+      dbHelper.clearCrashes();
+    }
+    super.onDestroy();
   }
 
   @Override
@@ -66,7 +86,7 @@ public class CrashListActivity extends BaseActivity implements CrashListActions 
   @Override
   public void openCrashDetails(int crashId) {
     Intent intent = new Intent(this, CrashActivity.class);
-    intent.putExtra(CrashActivity.CRASH_ID, crashId);
+    intent.putExtra(CRASH_ID, crashId);
 
     startActivity(intent);
   }

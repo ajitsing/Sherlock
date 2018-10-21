@@ -54,9 +54,11 @@ public class Sherlock {
     return instance;
   }
 
-  public List<Crash> getAllCrashes() {
+  public static List<Crash> getAllCrashes() {
     return getInstance().database.getCrashes();
   }
+
+  public static void clearAllCrashes() { getInstance().database.clearCrashes(); }
 
   private static void analyzeAndReportCrash(Throwable throwable) {
     Log.d(TAG, "Analyzing Crash...");

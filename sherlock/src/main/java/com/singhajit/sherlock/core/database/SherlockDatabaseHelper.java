@@ -61,6 +61,10 @@ public class SherlockDatabaseHelper extends SQLiteOpenHelper {
     return crashes;
   }
 
+  public void clearCrashes() {
+    getWritableDatabase().execSQL(CrashTable.DELETE_ALL);
+  }
+
   public Crash getCrashById(int id) {
     SQLiteDatabase readableDatabase = getReadableDatabase();
     Cursor cursor = readableDatabase.rawQuery(CrashTable.selectById(id), null);
